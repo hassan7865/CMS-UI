@@ -1,0 +1,49 @@
+<section #bodypd id="body-pd">
+    <header #headerpd class="header" id="header">
+      <div #toggle id="header-toggle">
+        <mat-icon >sort</mat-icon>
+      </div>
+     
+      <div class="header_img">
+        <mat-icon>person</mat-icon>
+      </div>
+    </header>
+    <div class="l-navbar" #nav id="nav-bar">
+      <nav class="nav">
+        <div>
+          <a  class="nav_logo">
+            <img class="bx bx-layer nav_logo-icon" src="assets/adminlogo.png" width="30" height="30" >
+            <span class="nav_logo-name">CMS ADMIN</span>
+          </a>
+          <div class="nav_list">
+            <a routerLink="/admin/dashboard" class="nav_link active">
+              <mat-icon class="bx bx-grid-alt nav_icon">space_dashboard</mat-icon>
+              <span class="nav_name">Dashboard</span>
+            </a>
+            <a routerLink="/admin/users" class="nav_link">
+                <mat-icon class="bx bx-grid-alt nav_icon">group</mat-icon>
+              <span class="nav_name">Users</span>
+            </a>
+            <a href="#" class="nav_link">
+                <mat-icon class="bx bx-grid-alt nav_icon">storefront</mat-icon>
+              <span class="nav_name">Customer</span>
+            </a>
+            <a href="#" class="nav_link">
+              <mat-icon class="bx bx-grid-alt nav_icon">loyalty</mat-icon>
+              <span class="nav_name">Shipments</span>
+            </a>
+          </div>
+        </div>
+        <a (click)="Logout()" class="nav_link">
+            <mat-icon class="bx bx-grid-alt nav_icon">logout</mat-icon>
+          <span class="nav_name">Logout</span>
+        </a>
+      </nav>
+    </div>
+    <!--Container Main start-->
+    <div >
+      <router-outlet></router-outlet>
+    </div>
+    
+  </section>
+  

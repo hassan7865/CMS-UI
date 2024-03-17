@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <!-- The image half -->
+        <div class="col-md-6 d-none d-md-flex bg-image"></div>
+
+
+        <!-- The content half -->
+        <div class="col-md-6 bg-light">
+            <div class="login d-flex align-items-center py-5">
+
+                <!-- Demo content-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-xl-7 mx-auto">
+                            <h3 class="display-4">Login!</h3>
+                            <p class="text-muted mb-4">Login to your account.</p>
+                            <form [formGroup]="LoginForm" (ngSubmit)="OnLogin()">
+                                <div class="form-group mb-3">
+                                    <input autocomplete="off" formControlName="UserName" id="inputEmail" type="text"
+                                        placeholder="Username" class="form-control  border-0 shadow-sm px-4">
+                                    <small
+                                        *ngIf="LoginForm.get('UserName').hasError('required') && LoginForm.get('UserName').touched"
+                                        class="text-danger">*Username is required</small>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <input autocomplete="new-password" formControlName="Password" id="inputPassword"
+                                        type="password" placeholder="Password"
+                                        class="form-control  border-0 shadow-sm px-4">
+                                    <small
+                                        *ngIf="LoginForm.get('Password').hasError('required') && LoginForm.get('Password').touched"
+                                        class="text-danger">*Password is required</small>
+                                </div>
+
+                                <small *ngIf="error && error?.status === 404" class="text-danger mb-3">Entered
+                                    Credentials are not Matched</small>
+                                <small *ngIf="error && error?.status !== 404" class="text-danger mb-3">Error occured
+                                    while Login </small>
+
+                                <div class=" mt-4">
+                                    <button class="btn btn-primary" type="submit"
+                                        [disabled]="LoginForm.invalid || IsLoading">
+                                        <span *ngIf="IsLoading" class="spinner-border spinner-border-sm mx-2"
+                                            role="status" aria-hidden="true"></span>
+                                        <span [innerHTML]="IsLoading ? 'Loading..':'Login'"></span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- End -->
+
+            </div>
+        </div><!-- End -->
+
+    </div>
+</div>

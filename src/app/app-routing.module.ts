@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './Pages/home/home.component';
+import { adminGuard } from './Guard/admin.guard';
+import { NotfoundPageComponent } from './notfound-page/notfound-page.component';
+import { publicGuard } from './Guard/public.guard';
 
 const routes: Routes = [
-  {path:"home",component:HomeComponent},
-  {path:"",redirectTo:"/home",pathMatch:"full"}
+  {path:"admin",loadChildren:()=> import('./Admin/admin.module').then(m=> m.AdminModule),canActivate:[adminGuard]},
+  {path:"",loadChildren:()=> import("./public/public.module").then(m=>m.PublicModule),canActivate:[publicGuard]},
+  {path:"**",component:NotfoundPageComponent}
 ];
 
 @NgModule({
