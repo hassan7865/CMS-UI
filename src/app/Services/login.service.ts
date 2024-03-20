@@ -13,4 +13,9 @@ export class LoginService {
   Login(UserLoginData:any):Observable<any>{
     return this.http.post(`${environment.BASEURL}/User/Login-User`,{...UserLoginData})
   }
+
+  GetAllRole(): Observable<any>
+  {
+    return this.http.get(`${environment.BASEURL}/Role/GetAllRole`);
+  }
 }

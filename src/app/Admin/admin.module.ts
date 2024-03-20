@@ -4,19 +4,25 @@ import {MatIconModule} from '@angular/material/icon';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminlayoutComponent } from './adminlayout.component';
 import { DasboardComponent } from './dasboard/dasboard.component';
-import { UsersComponent } from './users/users.component';
+import { CourierComponent } from './courier/courier.component';
+import { DataTablesModule } from 'angular-datatables';
+import { AddCourierComponent } from './courier/add-courier/add-courier.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
   declarations: [
     AdminlayoutComponent,
     DasboardComponent,
-    UsersComponent,
+    CourierComponent,
+    AddCourierComponent,
   ],
   imports: [
     MatIconModule,
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    DataTablesModule,
+    MatSelectModule
   ]
 })
 export class AdminModule { }
