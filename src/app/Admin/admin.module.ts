@@ -8,6 +8,7 @@ import { CourierComponent } from './courier/courier.component';
 import { DataTablesModule } from 'angular-datatables';
 import { AddCourierComponent } from './courier/add-courier/add-courier.component';
 import {MatSelectModule} from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {MatSelectModule} from '@angular/material/select';
     CommonModule,
     AdminRoutingModule,
     DataTablesModule,
-    MatSelectModule
+    MatSelectModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }

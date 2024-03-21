@@ -1,33 +1,41 @@
-<section class="p-3">
-    <h3>Add Courier</h3>
-    <form>
+<section class="p-5">
+    <h3 class="text-center text-decoration-underline fw-bold ">Add Courier</h3>
+    <form [formGroup]="SubmitForm" (ngSubmit)="Submit()">
         <div class="mb-3">
           <label for="" class="form-label">Courier Name</label>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" formControlName="Cname">
+          <small *ngIf="SubmitForm.get('Cname').hasError('required') && SubmitForm.get('Cname').touched" class="text-danger">Courier Name is required</small>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">User Name</label>
+          <input type="text" class="form-control" formControlName="userName">
+          <small *ngIf="SubmitForm.get('userName').hasError('required') && SubmitForm.get('userName').touched" class="text-danger ">User Name is required</small>
         </div>
         
         <div class="mb-3">
           <label for="" class="form-label">Email</label>
-          <input type="email" class="form-control">
+          <input type="email" class="form-control" formControlName="email">
         </div>
 
         <div class="mb-3">
           <label for="" class="form-label">Password</label>
-          <input type="password" class="form-control" >
+          <input type="password" class="form-control" formControlName="password">
+          <small *ngIf="SubmitForm.get('password').hasError('required') && SubmitForm.get('password').touched" class="text-danger ">Password is required</small>
         </div>
 
-        <mat-select class="form-control ">
-                <label for="">Select Role</label>
-              <mat-option *ngFor="let role of dataRole">
+        <mat-label for="">Select Role</mat-label>
+        <mat-select class="form-control mb-4" formControlName="role">
+            <mat-option *ngFor="let role of dataRole" [value]="role">
                 {{role.roleName}}       
             </mat-option>
-          </mat-select>
+        </mat-select>
 
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        <div >
+            <button type="submit" class="btn btn-primary" [disabled]="SubmitForm.invalid || IsLoading">
+                <span *ngIf="IsLoading" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>
+                <span>{{IsLoading ? "Loading..": "Submit"}}</span>
+            </button>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
 </section>
