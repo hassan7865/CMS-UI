@@ -24,4 +24,15 @@ export class CourierService {
   {
     return this.http.post(`${environment.BASEURL}/PostCourier`, data);
   }
+
+  getAllRoute():Observable<any>{
+   return this.http.get(`${environment.BASEURL}/Route/GetAllRoute`) 
+  }
+
+  CreateCourier(CreateCourierData):Observable<any>{
+    return this.http.post(`${environment.BASEURL}/Courier/PostCourier`,{
+      CourierName:CreateCourierData.Name,
+      RouteId:CreateCourierData.routeId
+    })
+  }
 }

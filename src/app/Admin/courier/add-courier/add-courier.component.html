@@ -1,37 +1,45 @@
 <section class="p-5">
     <h3 class="text-center text-decoration-underline fw-bold ">Add Courier</h3>
-    <form [formGroup]="SubmitForm" (ngSubmit)="Submit()">
+    <form [formGroup]="CreateCourierForm" (ngSubmit)="OnSubmit()">
         <div class="mb-3">
           <label for="" class="form-label">Courier Name</label>
-          <input type="text" class="form-control" formControlName="Cname">
-          <small *ngIf="SubmitForm.get('Cname').hasError('required') && SubmitForm.get('Cname').touched" class="text-danger">Courier Name is required</small>
+          <input type="text" class="form-control" formControlName="Name">
+          <small *ngIf="CreateCourierForm.get('Name').hasError('required') && CreateCourierForm.get('Name').touched" class="text-danger">Name is required</small>
         </div>
         <div class="mb-3">
           <label for="" class="form-label">User Name</label>
           <input type="text" class="form-control" formControlName="userName">
-          <small *ngIf="SubmitForm.get('userName').hasError('required') && SubmitForm.get('userName').touched" class="text-danger ">User Name is required</small>
+          <small *ngIf="CreateCourierForm.get('userName').hasError('required') && CreateCourierForm.get('userName').touched" class="text-danger ">User Name is required</small>
         </div>
         
         <div class="mb-3">
           <label for="" class="form-label">Email</label>
-          <input type="email" class="form-control" formControlName="email">
+          <input autocomplete="off" type="email" class="form-control" formControlName="email">
         </div>
 
         <div class="mb-3">
           <label for="" class="form-label">Password</label>
-          <input type="password" class="form-control" formControlName="password">
-          <small *ngIf="SubmitForm.get('password').hasError('required') && SubmitForm.get('password').touched" class="text-danger ">Password is required</small>
+          <input  autocomplete="new-password" type="password" class="form-control" formControlName="Password">
+          <small *ngIf="CreateCourierForm.get('Password').hasError('required') && CreateCourierForm.get('Password').touched" class="text-danger ">Password is required</small>
         </div>
 
         <mat-label for="">Select Role</mat-label>
-        <mat-select class="form-control mb-4" formControlName="role">
-            <mat-option *ngFor="let role of dataRole" [value]="role">
+        <mat-select class="form-control mb-4" formControlName="roleId">
+            <mat-option *ngFor="let role of dataRole" [value]="role.roleId">
                 {{role.roleName}}       
             </mat-option>
         </mat-select>
+        <small *ngIf="CreateCourierForm.get('roleId').hasError('required') && CreateCourierForm.get('roleId').touched" class="text-danger ">Role is required</small>
 
+        <mat-label for="">Select Route</mat-label>
+        <mat-select class="form-control mb-4" formControlName="routeId">
+            <mat-option *ngFor="let route of dataRoute" [value]="route.routeId">
+                {{route.routeName}}       
+            </mat-option>
+        </mat-select>
+        <small *ngIf="CreateCourierForm.get('roleId').hasError('required') && CreateCourierForm.get('roleId').touched" class="text-danger ">Role is required</small>
         <div >
-            <button type="submit" class="btn btn-primary" [disabled]="SubmitForm.invalid || IsLoading">
+            <button type="submit" class="btn btn-primary" [disabled]="CreateCourierForm.invalid || IsLoading">
                 <span *ngIf="IsLoading" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>
                 <span>{{IsLoading ? "Loading..": "Submit"}}</span>
             </button>

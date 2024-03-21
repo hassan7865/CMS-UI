@@ -1,35 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
+
 import { CourierService } from 'src/app/Services/courier.service';
 import { AddCourierComponent } from './add-courier/add-courier.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-courier',
   templateUrl: './courier.component.html',
   styleUrls: ['./courier.component.scss']
 })
-export class CourierComponent implements OnInit {
+export class CourierComponent implements AfterViewInit {
 
-  dtoptions: DataTables.Settings = {};
-  dataCourier:any[]
-  dtTrigger:Subject<any>=new Subject<any>();
+  dataCourier = new MatTableDataSource<any[]>();
+  displayedColumns: string[] = ['No', 'Name', 'RouteId',];
 
-    ngOnInit(): void {
-      this.dtoptions = {
-        pagingType : "full_numbers",
-        searching: false, 
-        lengthChange:false,
-        language:{
-        searchPlaceholder:'Text Customer'
-    }
+  constructor(private courierservice: CourierService,
+    private dialog: MatDialog) {}
 
-      }
-      this.getAllCourier()
-    }
-    constructor(private courierservice: CourierService,
-      private dialog: MatDialog) {}
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  ngAfterViewInit(): void {
+    this.dataCourier.paginator = this.paginator;
+    this.getAllCourier()
+
+  }
+   
     getAllCourier() 
     {
       this.courierservice.getAllCouriers()
@@ -37,9 +34,8 @@ export class CourierComponent implements OnInit {
         {
           next : (res) =>
           {
-            this.dataCourier = res;
+            this.dataCourier.data = res;
             console.log(res);
-            this.dtTrigger.next(null);
           } 
         }
       )
@@ -47,10 +43,13 @@ export class CourierComponent implements OnInit {
 
     openAddCourier()
     {
-      this.dialog.open(AddCourierComponent, {
+      const dialogRef = this.dialog.open(AddCourierComponent, {
         height: "400px",
-        width: "50%"
+        width: "50%",
       })
+      dialogRef.afterClosed().subscribe(result => {
+        this.getAllCourier()
+      });
     }
 
 }

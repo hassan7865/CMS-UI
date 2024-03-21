@@ -9,7 +9,8 @@ import { DataTablesModule } from 'angular-datatables';
 import { AddCourierComponent } from './courier/add-courier/add-courier.component';
 import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     MatIconModule,
+    MatPaginatorModule,
     CommonModule,
     AdminRoutingModule,
+    MatTableModule,
     DataTablesModule,
     MatSelectModule,
     ReactiveFormsModule
