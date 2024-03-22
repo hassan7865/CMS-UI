@@ -1,5 +1,11 @@
-<section class="p-5">
-    <h3 class="text-center text-decoration-underline fw-bold ">Add Courier</h3>
+<div class="d-flex justify-content-between align-items-center p-2" style="border-bottom: 1px solid #ddd;">
+  <h4 class=" flex-grow-1 p-3 text-left text-dark">ON BOARD COURIER</h4>
+  <button mat-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content class="mat-typography">
     <form [formGroup]="CreateCourierForm" (ngSubmit)="OnSubmit()">
         <div class="mb-3">
           <label for="" class="form-label">Courier Name</label>
@@ -46,4 +52,4 @@
         </div>
     </form>
 
-</section>
+</mat-dialog-content>

@@ -78,5 +78,9 @@ export class AddCourierComponent implements OnInit{
       }
     })
   }
+
+  handleClose(){
+    this.dialogRef.close()
+  }
   }
 

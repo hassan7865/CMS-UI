@@ -14,7 +14,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class CourierComponent implements AfterViewInit {
 
   dataCourier = new MatTableDataSource<any[]>();
-  displayedColumns: string[] = ['No', 'Name', 'RouteId',];
+  displayedColumns: string[] = ['No', 'Name', 'RouteId','edit','delete','view'];
 
   constructor(private courierservice: CourierService,
     private dialog: MatDialog) {}
@@ -44,7 +44,6 @@ export class CourierComponent implements AfterViewInit {
     openAddCourier()
     {
       const dialogRef = this.dialog.open(AddCourierComponent, {
-        height: "400px",
         width: "50%",
       })
       dialogRef.afterClosed().subscribe(result => {
