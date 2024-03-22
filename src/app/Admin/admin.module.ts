@@ -13,6 +13,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RouteComponent } from './courier/route/route.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     DasboardComponent,
     CourierComponent,
     AddCourierComponent,
+    RouteComponent,
   ],
   imports: [
     MatIconModule,

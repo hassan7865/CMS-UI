@@ -1,0 +1,31 @@
+<div class="d-flex justify-content-between align-items-center p-2" style="background-color: #5236c2;">
+    <h4 class=" flex-grow-1 p-2 text-left text-white">Route</h4>
+    <button mat-button mat-dialog-close>
+        <mat-icon class="text-white">close</mat-icon>
+    </button>
+</div>
+<mat-dialog-content class="mat-typography">
+    <div *ngIf="isCreateNew" class="d-flex gap-1 align-items-center mb-3 ">
+        <input [formControl]="CreateRoute" placeholder="Enter Route" class="form-control">
+        <div class="d-flex gap-1 align-items-center ">
+            <div class="d-flex align-items-center justify-content-center " style="background-color: teal;width: 30px;height: 30px;border-radius:5px;">
+                <span *ngIf="IsLoading" class="spinner-border spinner-border-sm text-white"
+                role="status" aria-hidden="true"></span>
+                <mat-icon *ngIf="!IsLoading" (click)="onCreate()" class="text-white">done</mat-icon>
+            </div>
+            <div class="bg-danger  d-flex align-items-center justify-content-center" style="width: 30px;height: 30px;border-radius:5px;"><mat-icon class="text-white" (click)="toggleisCreateNew()">close</mat-icon></div>
+        </div>
+    </div>
+    <div *ngIf="!isCreateNew" class="d-flex justify-content-end mb-3">
+        <mat-icon (click)="toggleisCreateNew()">edit</mat-icon>
+    </div>
+    <div *ngFor="let item of dataRoute">
+        <div class="d-flex p-2 justify-content-between">
+            <div>{{item.routeName}}</div>
+            <div>
+                <mat-icon (click)="openDeleteDialog(item.routeId)" class="text-danger">delete</mat-icon>
+            </div>
+        </div>
+    </div>
+    
+</mat-dialog-content>

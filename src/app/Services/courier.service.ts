@@ -35,4 +35,14 @@ export class CourierService {
       RouteId:CreateCourierData.routeId
     })
   }
+
+  createRoute(routeName:any):Observable<any>{
+    return this.http.post(`${environment.BASEURL}/Route/PostRoute`,{
+      RouteName:routeName
+    })
+  }
+
+  deleteRoute(routeId:any):Observable<any>{
+    return this.http.delete(`${environment.BASEURL}/Route/DeleteRoute/${routeId}`)
+  }
 }

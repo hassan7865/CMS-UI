@@ -10,6 +10,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CreatedComponent } from './SnackBars/created/created.component';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { DeleteComponent } from './delete/delete.component';
 
 
 
@@ -17,10 +20,13 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     AppComponent,
     NotfoundPageComponent,
+    CreatedComponent,
+    DeleteComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatSnackBarModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatDialogModule,

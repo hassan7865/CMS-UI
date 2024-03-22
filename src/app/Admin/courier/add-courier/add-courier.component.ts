@@ -3,7 +3,16 @@ import { LoginService } from 'src/app/Services/login.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CourierService } from 'src/app/Services/courier.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
+import {
+  MatSnackBar,
+  MatSnackBarAction,
+  MatSnackBarActions,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarLabel,
+  MatSnackBarRef,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import { CreatedComponent } from 'src/app/SnackBars/created/created.component';
 @Component({
   selector: 'app-add-courier',
   templateUrl: './add-courier.component.html',
@@ -31,8 +40,11 @@ export class AddCourierComponent implements OnInit{
   constructor(private loginService: LoginService,
     private courierService: CourierService,
     private dialogRef: MatDialogRef<AddCourierComponent>,
+    private _snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) private data: any
     ){}
+    horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+    verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   getAllRole()
   {
@@ -82,5 +94,14 @@ export class AddCourierComponent implements OnInit{
   handleClose(){
     this.dialogRef.close()
   }
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(CreatedComponent, {
+      duration: 3000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      
+    });
   }
+}
 

@@ -5,6 +5,7 @@ import { CourierService } from 'src/app/Services/courier.service';
 import { AddCourierComponent } from './add-courier/add-courier.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { RouteComponent } from './route/route.component';
 
 @Component({
   selector: 'app-courier',
@@ -44,11 +45,18 @@ export class CourierComponent implements AfterViewInit {
     openAddCourier()
     {
       const dialogRef = this.dialog.open(AddCourierComponent, {
-        width: "50%",
+        width: "45%",
       })
       dialogRef.afterClosed().subscribe(result => {
         this.getAllCourier()
       });
+    }
+
+    openRoute()
+    {
+      const dialogRef = this.dialog.open(RouteComponent, {
+        width: "45%",
+      })
     }
 
 }
