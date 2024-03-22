@@ -16,13 +16,27 @@ export class DeleteComponent {
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {}
 
-  deleteRoute() {
-    this.loading =true
-    this.courierService.deleteRoute(this.data.id).subscribe({
-      next:(res)=>{
-        this.loading = false
-        this.dialogRef.close()
-      }
-    });
+  Delete() {
+
+    if(this.data.type === 'courier'){
+      this.loading =true
+      this.courierService.deleteCourier(this.data.id).subscribe({
+        next:(res)=>{
+          this.loading = false
+          this.dialogRef.close()
+        }
+      });
+    }
+
+    else if(this.data.type === 'route'){
+      this.loading =true
+      this.courierService.deleteRoute(this.data.id).subscribe({
+        next:(res)=>{
+          this.loading = false
+          this.dialogRef.close()
+        }
+      });
+    }
+   
   }
 }

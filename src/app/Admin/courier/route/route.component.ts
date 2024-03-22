@@ -57,7 +57,8 @@ export class RouteComponent implements OnInit {
       width: '350px',
 
       data:{
-        id:id
+        id:id,
+        type:'route'
       }
     })
     dialogRef.afterClosed().subscribe(result => {

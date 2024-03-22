@@ -6,6 +6,7 @@ import { AddCourierComponent } from './add-courier/add-courier.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { RouteComponent } from './route/route.component';
+import { DeleteComponent } from 'src/app/delete/delete.component';
 
 @Component({
   selector: 'app-courier',
@@ -59,4 +60,18 @@ export class CourierComponent implements AfterViewInit {
       })
     }
 
+    openDeleteDialog(id:any) {
+      const dialogRef = this.dialog.open(DeleteComponent, {
+        height: '',
+        width: '350px',
+  
+        data:{
+          id:id,
+          type:"courier"
+        }
+      })
+      dialogRef.afterClosed().subscribe(result => {
+        this.getAllCourier()
+      });
+    }
 }

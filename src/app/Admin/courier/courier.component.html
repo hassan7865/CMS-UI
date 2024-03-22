@@ -42,7 +42,7 @@
           <ng-container matColumnDef="delete">
             <th mat-header-cell *matHeaderCellDef>Delete</th>
             <td mat-cell *matCellDef="let element">
-              <button class="btn btn-danger rounded-0 w-100">Delete</button>
+              <button (click)="openDeleteDialog(element.courierId)" class="btn btn-danger rounded-0 w-100">Delete</button>
             </td>
           </ng-container>
   
