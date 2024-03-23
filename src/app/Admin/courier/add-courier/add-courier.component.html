@@ -27,25 +27,19 @@
           <label for="" class="form-label">Password</label>
           <input  autocomplete="new-password" type="password" class="form-control" formControlName="Password">
           <small *ngIf="CreateCourierForm.get('Password').hasError('required') && CreateCourierForm.get('Password').touched" class="text-danger ">Password is required</small>
+        </div> 
+        <div class="mb-3">
+          <mat-label for="">Select Route</mat-label>
+          <mat-select class="form-control" formControlName="routeId">
+              <mat-option *ngFor="let route of dataRoute" [value]="route.routeId">
+                  {{route.routeName}}       
+              </mat-option>
+          </mat-select>
+          <small *ngIf="CreateCourierForm.get('routeId').hasError('required') && CreateCourierForm.get('routeId').touched" class="text-danger ">Route is required</small>
         </div>
-
-        <mat-label for="">Select Role</mat-label>
-        <mat-select class="form-control mb-4" formControlName="roleId">
-            <mat-option *ngFor="let role of dataRole" [value]="role.roleId">
-                {{role.roleName}}       
-            </mat-option>
-        </mat-select>
-        <small *ngIf="CreateCourierForm.get('roleId').hasError('required') && CreateCourierForm.get('roleId').touched" class="text-danger ">Role is required</small>
-
-        <mat-label for="">Select Route</mat-label>
-        <mat-select class="form-control mb-4" formControlName="routeId">
-            <mat-option *ngFor="let route of dataRoute" [value]="route.routeId">
-                {{route.routeName}}       
-            </mat-option>
-        </mat-select>
-        <small *ngIf="CreateCourierForm.get('roleId').hasError('required') && CreateCourierForm.get('roleId').touched" class="text-danger ">Role is required</small>
+      
         <div >
-            <button type="submit" class="btn btn-primary" [disabled]="CreateCourierForm.invalid || IsLoading">
+            <button style="width: 100%;" type="submit" class="btn btn-primary" [disabled]="CreateCourierForm.invalid || IsLoading">
                 <span *ngIf="IsLoading" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>
                 <span>{{IsLoading ? "Loading..": "Submit"}}</span>
             </button>

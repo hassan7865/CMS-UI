@@ -14,6 +14,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouteComponent } from './courier/route/route.component';
+import { LoaderComponent } from './loader/loader.component';
+import { EditCourierComponent } from './courier/edit-courier/edit-courier.component';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,14 @@ import { RouteComponent } from './courier/route/route.component';
     CourierComponent,
     AddCourierComponent,
     RouteComponent,
+    LoaderComponent,
+    EditCourierComponent,
+    
+   
   ],
   imports: [
     MatIconModule,
+    
     MatButtonModule,
     MatPaginatorModule,
     CommonModule,

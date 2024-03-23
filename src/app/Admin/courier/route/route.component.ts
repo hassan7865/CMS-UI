@@ -11,6 +11,7 @@ import { DeleteComponent } from 'src/app/delete/delete.component';
 })
 export class RouteComponent implements OnInit {
   IsLoading:boolean = false
+  LoadingRoute:boolean = false
   ngOnInit(): void {
    this.getAllRoute()
   }
@@ -24,11 +25,13 @@ export class RouteComponent implements OnInit {
   }
   getAllRoute()
   {
+    this.LoadingRoute = true
     this.courierService.getAllRoute()
     .subscribe
     ({
       next: (res)=>
       {
+        this.LoadingRoute = false
         this.dataRoute = res
       }
     })
@@ -58,11 +61,9 @@ export class RouteComponent implements OnInit {
 
       data:{
         id:id,
-        type:'route'
+        type:'route',
+        getAll:this.getAllRoute.bind(this)
       }
     })
-    dialogRef.afterClosed().subscribe(result => {
-      this.getAllRoute()
-    });
   }
 }

@@ -29,10 +29,11 @@ export class CourierService {
    return this.http.get(`${environment.BASEURL}/Route/GetAllRoute`) 
   }
 
-  CreateCourier(CreateCourierData):Observable<any>{
+  CreateCourier(CreateCourierData,userId:any):Observable<any>{
     return this.http.post(`${environment.BASEURL}/Courier/PostCourier`,{
       CourierName:CreateCourierData.Name,
-      RouteId:CreateCourierData.routeId
+      RouteId:CreateCourierData.routeId,
+      UserId:userId
     })
   }
 
@@ -48,5 +49,9 @@ export class CourierService {
 
   deleteRoute(routeId:any):Observable<any>{
     return this.http.delete(`${environment.BASEURL}/Route/DeleteRoute/${routeId}`)
+  }
+
+  getCourierById(courierId:any):Observable<any>{
+    return this.http.get(`${environment.BASEURL}/Courier/GetCourier/${courierId}`)
   }
 }

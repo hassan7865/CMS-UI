@@ -5,14 +5,8 @@ import { CourierService } from 'src/app/Services/courier.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {
   MatSnackBar,
-  MatSnackBarAction,
-  MatSnackBarActions,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarLabel,
-  MatSnackBarRef,
-  MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import { CreatedComponent } from 'src/app/SnackBars/created/created.component';
+import { openSnackBar } from 'src/app/SnackBar';
 @Component({
   selector: 'app-add-courier',
   templateUrl: './add-courier.component.html',
@@ -21,18 +15,16 @@ import { CreatedComponent } from 'src/app/SnackBars/created/created.component';
 export class AddCourierComponent implements OnInit{
 
   ngOnInit(): void {
-    this.getAllRole();
     this.getAllRoute()
     this.CreateCourierForm = new FormGroup({
       Name: new FormControl(null,Validators.required),
       userName: new FormControl(null, Validators.required),
       email:new FormControl(null),
       Password: new FormControl(null, Validators.required),
-      roleId: new FormControl(null, Validators.required),
+      roleId: new FormControl(2, Validators.required),
       routeId:new FormControl(null, Validators.required)
     })
   }
-  dataRole:any[];
   dataRoute:any[];
   IsLoading= false;
   CreateCourierForm:FormGroup;
@@ -41,23 +33,9 @@ export class AddCourierComponent implements OnInit{
     private courierService: CourierService,
     private dialogRef: MatDialogRef<AddCourierComponent>,
     private _snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) private data: any
+    @Inject(MAT_DIALOG_DATA) private data: any,
     ){}
-    horizontalPosition: MatSnackBarHorizontalPosition = 'end';
-    verticalPosition: MatSnackBarVerticalPosition = 'top';
-
-  getAllRole()
-  {
-    this.loginService.GetAllRole()
-    .subscribe
-    ({
-      next: (res)=>
-      {
-        this.dataRole = res
-        console.log(res);
-      }
-    })
-  }
+   
 
   getAllRoute()
   {
@@ -67,41 +45,34 @@ export class AddCourierComponent implements OnInit{
       next: (res)=>
       {
         this.dataRoute = res
-        console.log(res);
+      
       }
     })
   }
 
   OnSubmit(){
     this.IsLoading = true
-    this.courierService.CreateCourier(this.CreateCourierForm.value).subscribe({
-      next:(res)=>{
-        this.CreateUser()
-
-      }
-    })
-  }
-
-  CreateUser(){
     this.loginService.CreateUser(this.CreateCourierForm.value).subscribe({
       next:(res)=>{
+        this.CreateCourier(res.id)
+      }
+    })
+    
+  }
+
+  CreateCourier(userId:any){
+    this.courierService.CreateCourier(this.CreateCourierForm.value,userId).subscribe({
+      next:(res)=>{
+        this.data.getCourier()
         this.IsLoading = false
         this.dialogRef.close()
+        openSnackBar(this._snackBar,"Created Successfully","Courier has been Created Successfully")
       }
     })
   }
 
   handleClose(){
     this.dialogRef.close()
-  }
-
-  openSnackBar() {
-    this._snackBar.openFromComponent(CreatedComponent, {
-      duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      
-    });
   }
 }
 

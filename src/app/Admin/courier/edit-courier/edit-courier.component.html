@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-between align-items-center p-2" style="background-color: #5236c2;">
+    <h4 class=" flex-grow-1 p-2 text-left text-white">Update Courier</h4>
+    <button mat-button mat-dialog-close>
+        <mat-icon class="text-white">close</mat-icon>
+    </button>
+  </div>
+  
+  <mat-dialog-content class="mat-typography">
+      <form [formGroup]="UpdateCourierForm" (ngSubmit)="OnUpdate()">
+          <div class="mb-3">
+            <label for="" class="form-label">Courier Name</label>
+            <input type="text" class="form-control" formControlName="Name">
+            <small *ngIf="UpdateCourierForm.get('Name').hasError('required') && UpdateCourierForm.get('Name').touched" class="text-danger">Name is required</small>
+          </div>
+          <div class="mb-3">
+            <label for="" class="form-label">User Name</label>
+            <input type="text" class="form-control" formControlName="userName">
+            <small *ngIf="UpdateCourierForm.get('userName').hasError('required') && UpdateCourierForm.get('userName').touched" class="text-danger ">User Name is required</small>
+          </div>
+          
+          <div class="mb-3">
+            <label for="" class="form-label">Email</label>
+            <input autocomplete="off" type="email" class="form-control" formControlName="email">
+          </div>
+  
+          <div class="mb-3">
+            <mat-label for="">Select Route</mat-label>
+            <mat-select class="form-control" formControlName="routeId">
+                <mat-option *ngFor="let route of dataRoute" [value]="route.routeId">
+                    {{route.routeName}}       
+                </mat-option>
+            </mat-select>
+            <small *ngIf="UpdateCourierForm.get('routeId').hasError('required') && UpdateCourierForm.get('routeId').touched" class="text-danger ">Route is required</small>
+          </div>
+        
+          <div >
+              <button style="width: 100%;" type="submit" class="btn btn-primary" [disabled]="UpdateCourierForm.invalid || IsLoading">
+                  <span *ngIf="IsLoading" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>
+                  <span>{{IsLoading ? "Loading..": "Submit"}}</span>
+              </button>
+          </div>
+      </form>
+  
+  </mat-dialog-content>

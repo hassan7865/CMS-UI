@@ -1,68 +1,73 @@
 <section>
   <div class="card">
     <div class="card-header text-white" style="background-color: #5236c2;">
-      Manage Users
+      Manage Courier
     </div>
-    <div class="card-body mat-elevation-z8 card-body overflow-auto">
+    <div class="card-body  mat-elevation-z8 card-body overflow-auto">
       <div class="d-flex justify-content-between  mb-2">
         <button style="background-color: #5236c2;" class="btn text-white" (click)="openAddCourier()">Create</button>
-        <button (click)="openRoute()"  style="background-color: #5236c2;display: flex;align-items: center;gap: 5px;" class="btn text-white" ><mat-icon class="text-white">route</mat-icon>Route</button>
+        <button (click)="openRoute()" style="background-color: #5236c2;display: flex;align-items: center;gap: 5px;"
+          class="btn text-white"><mat-icon class="text-white">route</mat-icon>Route</button>
       </div>
-     
-      
-        <table mat-table [dataSource]="dataCourier">
-      
-          <!-- Position Column -->
-          <ng-container matColumnDef="No">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element;let i = index"> {{i+1}} </td>
-          </ng-container>
-      
-          <!-- Name Column -->
-          <ng-container matColumnDef="Name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.courierName}} </td>
-          </ng-container>
-      
-          <!-- Weight Column -->
-          <ng-container matColumnDef="RouteId">
-            <th mat-header-cell *matHeaderCellDef> RouteId </th>
-            <td mat-cell *matCellDef="let element"> {{element.routeId}} </td>
-          </ng-container>
-      
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="edit">
-            <th mat-header-cell *matHeaderCellDef>Edit</th>
-            <td mat-cell *matCellDef="let element">
-              <button
-                class="btn btn-primary rounded-0 w-100">Edit</button>
-            </td>
-          </ng-container>
-  
-          <ng-container matColumnDef="delete">
-            <th mat-header-cell *matHeaderCellDef>Delete</th>
-            <td mat-cell *matCellDef="let element">
-              <button (click)="openDeleteDialog(element.courierId)" class="btn btn-danger rounded-0 w-100">Delete</button>
-            </td>
-          </ng-container>
-  
-          <ng-container matColumnDef="view">
-            <th mat-header-cell *matHeaderCellDef>View</th>
-            <td mat-cell *matCellDef="let element">
-              <button class="btn btn-success rounded-0 w-100 ">View</button>
-            </td>
-          </ng-container>
 
-      
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-      
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                       showFirstLastButtons
-                       aria-label="Select page of periodic elements">
-        </mat-paginator>
+      <div *ngIf="IsLoading" class="d-flex justify-content-around align-items-center" style="height: 250px;">
+        <app-loader></app-loader>
       </div>
-      
+
+      <div class="d-flex justify-content-center flex-column align-items-center " *ngIf="dataCourier && dataCourier.data.length===0 && !IsLoading">
+        <img class="w-25 h-25 " src="assets/nodata.jpg">
+        <h5>No Data Found</h5>
+      </div>
+      <table *ngIf="!IsLoading && dataCourier.data.length!==0" mat-table [dataSource]="dataCourier">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="No">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element;let i = index"> {{i+1}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.courierName}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="RouteId">
+          <th mat-header-cell *matHeaderCellDef> Route </th>
+          <td mat-cell *matCellDef="let element"> {{element.routeName ? element.routeName:'-'}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef>Edit</th>
+          <td mat-cell *matCellDef="let element">
+            <button (click)="openUpdate(element.courierId)" class="btn btn-primary rounded-0 w-100">Edit</button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef>Delete</th>
+          <td mat-cell *matCellDef="let element">
+            <button (click)="openDeleteDialog(element.courierId)" class="btn btn-danger rounded-0 w-100">Delete</button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="view">
+          <th mat-header-cell *matHeaderCellDef>View</th>
+          <td mat-cell *matCellDef="let element">
+            <button class="btn btn-success rounded-0 w-100 ">View</button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator  [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+        aria-label="Select page of periodic elements">
+      </mat-paginator>
     </div>
+
+  </div>
 </section>
