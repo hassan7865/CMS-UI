@@ -1,0 +1,41 @@
+<div class="mat-elevation-z8 mb-5">
+    <p style="background-color: #5236c2; font-weight: 600;" class="text-white pt-2 px-3 pb-1 fs-5 rounded-top">Customer</p>
+    <button class="btn mx-3 text-white " style="background-color: #5236c2;">Create</button>
+    <div *ngIf="IsLoading" class="d-flex justify-content-around align-items-center" style="height: 250px;">
+      <app-loader></app-loader>
+    </div>
+    <table *ngIf="!IsLoading && dataCustomer.data.length!==0" mat-table [dataSource]="dataCustomer">
+        
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let elementl let i= index"> {{i+1}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.vendorName}} </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.vendorEmail}} </td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef> Address </th>
+        <td mat-cell *matCellDef="let element"> {{element.vendorAddress}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>

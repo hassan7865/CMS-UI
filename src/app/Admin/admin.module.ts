@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { RouteComponent } from './courier/route/route.component';
 import { LoaderComponent } from './loader/loader.component';
 import { EditCourierComponent } from './courier/edit-courier/edit-courier.component';
+import { CustomerComponent } from './customer/customer.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { EditCourierComponent } from './courier/edit-courier/edit-courier.compon
     RouteComponent,
     LoaderComponent,
     EditCourierComponent,
+    CustomerComponent,
     
    
   ],
