@@ -14,6 +14,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouteComponent } from './courier/route/route.component';
+import { CustomerComponent } from './customer/customer.component';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { RouteComponent } from './courier/route/route.component';
     CourierComponent,
     AddCourierComponent,
     RouteComponent,
+    CustomerComponent,
   ],
   imports: [
     MatIconModule,
@@ -33,7 +36,8 @@ import { RouteComponent } from './courier/route/route.component';
     MatDialogModule,
     DataTablesModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSortModule
   ]
 })
 export class AdminModule { }

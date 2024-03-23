@@ -13,6 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreatedComponent } from './SnackBars/created/created.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { DeleteComponent } from './delete/delete.component';
+import { MatSortModule } from '@angular/material/sort';
+
 
 
 
@@ -32,7 +34,8 @@ import { DeleteComponent } from './delete/delete.component';
     MatDialogModule,
     MatIconModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
