@@ -20,7 +20,7 @@ export class CourierComponent implements AfterViewInit,OnInit {
 
   dataCourier = new MatTableDataSource<any[]>();
   IsLoading:boolean = false
-  displayedColumns: string[] = ['No', 'Name', 'RouteId','edit','delete','view'];
+  displayedColumns: string[] = ['No', 'Name', 'RouteId','edit','delete'];
 
   constructor(private courierservice: CourierService,
     private dialog: MatDialog,) {}

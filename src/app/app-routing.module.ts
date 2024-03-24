@@ -6,6 +6,7 @@ import { publicGuard } from './Guard/public.guard';
 
 const routes: Routes = [
   {path:"admin",loadChildren:()=> import('./Admin/admin.module').then(m=> m.AdminModule),canActivate:[adminGuard]},
+  {path:"customer",loadChildren:()=>import('./Customers/customers.module').then(m=>m.CustomersModule)},
   {path:"",loadChildren:()=> import("./public/public.module").then(m=>m.PublicModule),canActivate:[publicGuard]},
   {path:"**",component:NotfoundPageComponent}
 ];

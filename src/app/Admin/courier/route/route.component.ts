@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CourierService } from 'src/app/Services/courier.service';
+import { openSnackBar } from 'src/app/SnackBar';
 import { DeleteComponent } from 'src/app/delete/delete.component';
 
 @Component({
@@ -15,7 +17,7 @@ export class RouteComponent implements OnInit {
   ngOnInit(): void {
    this.getAllRoute()
   }
-  constructor(private courierService : CourierService,private dialog:MatDialog){}
+  constructor(private courierService : CourierService,private dialog:MatDialog,private snackBar : MatSnackBar){}
   dataRoute:any[]
   isCreateNew:boolean = false
   CreateRoute: FormControl = new FormControl(null, [Validators.required]);
@@ -49,6 +51,7 @@ export class RouteComponent implements OnInit {
         this.isCreateNew = false;
         this.getAllRoute();
         this.CreateRoute.patchValue(null);
+        openSnackBar(this.snackBar,"Created Successfully","The Route has been Created!")
       }
      })
    }

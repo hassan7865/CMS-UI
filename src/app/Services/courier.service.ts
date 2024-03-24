@@ -31,7 +31,7 @@ export class CourierService {
 
   CreateCourier(CreateCourierData,userId:any):Observable<any>{
     return this.http.post(`${environment.BASEURL}/Courier/PostCourier`,{
-      CourierName:CreateCourierData.Name,
+      CourierName:CreateCourierData.userName,
       RouteId:CreateCourierData.routeId,
       UserId:userId
     })
@@ -53,5 +53,15 @@ export class CourierService {
 
   getCourierById(courierId:any):Observable<any>{
     return this.http.get(`${environment.BASEURL}/Courier/GetCourier/${courierId}`)
+  }
+
+
+  UpdateCourier(courierId:any,courierData){
+    return this.http.put(`${environment.BASEURL}/Courier/UpdateCourier/${courierId}`,{
+      courierName:courierData.userName,
+      fullName:courierData.Name,
+      email:courierData.email,
+      routeId:courierData.routeId
+    })
   }
 }
