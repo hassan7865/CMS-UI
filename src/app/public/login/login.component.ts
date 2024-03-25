@@ -28,7 +28,13 @@ export class LoginComponent implements OnInit {
       next:(res)=>{
         this.IsLoading = false
         localStorage.setItem('login', JSON.stringify(res))
-        this.router.navigate(['/admin/dashboard'])
+        if(res.roleId === 1){
+          this.router.navigate(['/admin/dashboard'])
+        }
+        else if(res.roleId === 1002){
+          this.router.navigate(['/customer'])
+        }
+       
       },
       error:(error)=>{
         this.IsLoading = false
