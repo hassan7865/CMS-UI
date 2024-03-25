@@ -12,11 +12,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog'; 
 import { RouteComponent } from './courier/route/route.component';
 import { LoaderComponent } from './loader/loader.component';
 import { EditCourierComponent } from './courier/edit-courier/edit-courier.component';
 import { CustomerComponent } from './customer/customer.component';
+import { AddCustomerComponent } from './customer/add-customer/add-customer.component';
+import { EditCustomerComponent } from './customer/edit-customer/edit-customer.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { CustomerComponent } from './customer/customer.component';
     LoaderComponent,
     EditCourierComponent,
     CustomerComponent,
+    AddCustomerComponent,
+    EditCustomerComponent,
     
    
   ],

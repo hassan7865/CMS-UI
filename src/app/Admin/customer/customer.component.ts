@@ -3,6 +3,10 @@ import { CustomerService } from './../../Services/customer.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AddCustomerComponent } from './add-customer/add-customer.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteComponent } from 'src/app/delete/delete.component';
+import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 
 
 @Component({
@@ -16,7 +20,7 @@ export class CustomerComponent implements  OnInit, AfterViewInit{
   // dataCustomer:any[];
   IsLoading:Boolean = false;
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['No.', 'Name', 'Email', 'Address', 'Edit', 'Delete'];
   dataCustomer= new MatTableDataSource<any[]>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,6 +36,7 @@ export class CustomerComponent implements  OnInit, AfterViewInit{
   }
   constructor(
     private customerService: CustomerService,
+    private dialog: MatDialog
   ){}
 
 
@@ -47,6 +52,8 @@ export class CustomerComponent implements  OnInit, AfterViewInit{
       next: (res) =>
       {
         this.dataCustomer.data = res
+        console.log(res);
+        
         this.IsLoading = false;        
       },
       error: (err)=>
@@ -54,6 +61,42 @@ export class CustomerComponent implements  OnInit, AfterViewInit{
         console.log("Error: ",err);
       }
     })
+  }
+
+  openDialog()
+  {
+    this.dialog.open(AddCustomerComponent, 
+      {
+        width:'50vw',
+        height:'50'
+      })
+  }
+
+  deleteCustomer(id:any)
+  {
+    this.dialog.open(DeleteComponent,
+      {
+        width: '350px',
+        data: {
+          id: id,
+          type:'customer',
+          getAll: this.getAllCustomer.bind('this')
+        }
+      })
+  }
+
+
+  editCustomer(id:any)
+  {
+    this.dialog.open(EditCustomerComponent,
+      {
+        width:'50vw',
+        height: '60%',
+        data:
+        {
+          Id: id
+        }
+      })
   }
 
 }
