@@ -80,7 +80,7 @@ export class CustomerComponent implements  OnInit, AfterViewInit{
         data: {
           id: id,
           type:'customer',
-          getAll: this.getAllCustomer.bind('this')
+          getAll: this.getAllCustomer.bind(this)
         }
       })
   }

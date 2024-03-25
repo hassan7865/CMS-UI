@@ -31,4 +31,9 @@ export class CustomerService {
   {
     return this.http.get(`${environment.BASEURL}/Vendor/Get-Vendor/${id}`)
   }
+
+  deleteCustomer(id:any): Observable<any>
+  {
+    return this.http.delete(`${environment.BASEURL}/Vendor/DeleteVendor/${id}`)
+  }
 }
