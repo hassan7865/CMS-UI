@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { data } from 'jquery';
+import { Observable, ObservableLike } from 'rxjs';
 import { environment } from 'src/environment';
 
 @Injectable({
@@ -16,5 +17,23 @@ export class CustomerService {
   getAllCustomer(): Observable<any>
   {
     return this.http.get(`${environment.BASEURL}/Vendor/GetVendors`);
+  }
+
+  postCustomer(dataCustomer):Observable<any>
+  {
+    return this.http.post(`${environment.BASEURL}/Vendor/CreateVendor`,
+    {
+
+    })
+  }
+
+  getCustomerById(id:number): Observable<any>
+  {
+    return this.http.get(`${environment.BASEURL}/Vendor/Get-Vendor/${id}`)
+  }
+
+  deleteCustomer(id:any): Observable<any>
+  {
+    return this.http.delete(`${environment.BASEURL}/Vendor/DeleteVendor/${id}`)
   }
 }

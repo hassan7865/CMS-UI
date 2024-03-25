@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CourierService } from '../Services/courier.service';
 import { openSnackBar } from '../SnackBar';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CustomerService } from '../Services/customer.service';
 
 @Component({
   selector: 'app-delete',
@@ -15,6 +16,7 @@ export class DeleteComponent {
   constructor(
     public dialogRef: MatDialogRef<DeleteComponent>,
     private courierService: CourierService,
+    private customerService: CustomerService,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private matSnackBar : MatSnackBar
   ) {}
@@ -43,6 +45,22 @@ export class DeleteComponent {
           openSnackBar(this.matSnackBar,"Deleted Successfully","The Selected Route has been Deleted!")
         }
       });
+    }
+
+    else if (this.data.type === 'customer')
+    {
+      this.loading = true;
+      this.customerService.deleteCustomer(this.data.id).subscribe(
+        {
+          next: (res)=>
+          {
+            this.data.getAll();
+            this.loading = false;
+            this.dialogRef.close();
+            openSnackBar(this.matSnackBar, "Deleted Successfuly", "The selected Customer has been Deleted!");
+          }
+        }
+      )
     }
   }
 }

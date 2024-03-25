@@ -1,0 +1,31 @@
+
+    <div class="d-flex justify-content-between p-4 pb-2" style="background-color: #5236c2;">
+        <h3 class="text-white ">Create Customer</h3>
+        <button mat-button mat-dialog-close>
+            <mat-icon class="text-white">close</mat-icon>
+        </button>
+      
+    </div>
+    <form class="p-4" [formGroup]="createCustomerForm">
+        <div class="mb-3">
+          <label  class="form-label">Name</label>
+          <input type="text" class="form-control" formControlName="VendorName">
+          <span class="text-danger" *ngIf="createCustomerForm.get('VendorName').hasError('required') && createCustomerForm.get('VendorName').touched">Name is required</span>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="VendorEmail">
+          <span class="text-danger " *ngIf="createCustomerForm.get('VendorEmail').hasError('required') && createCustomerForm.get('VendorEmail').touched">Email is required</span>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Address</label>
+          <input type="text" class="form-control" formControlName="VendorAddress">
+          <span class="text-danger " *ngIf="createCustomerForm.get('VendorAddress').hasError('required') && createCustomerForm.get('VendorAddress').touched">Address is required</span>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary w-100" [disabled]="IsLoading || createCustomerForm.invalid">
+                <span *ngIf="IsLoading" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>
+                <span>{{IsLoading? "Loading...": "Submit"}}</span>
+            </button>
+        </div>
+      </form>

@@ -1,0 +1,33 @@
+<div class="d-flex justify-content-between text-white pb-2 p-4" style="background-color: #5236c2;" >
+    <h3>Update Customer</h3>
+    <button mat-button mat-dialog-close>
+        <mat-icon class="text-white">close</mat-icon>
+    </button>
+</div>
+
+<div *ngIf="IsLoadingUpdate" class="d-flex justify-content-center align-items-center h-75 ">
+    <app-loader ></app-loader>
+</div>
+
+<form class="p-4" [formGroup]="UpdateCustomerForm" *ngIf="!IsLoadingUpdate">
+
+
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" formControlName="vendorName">
+      </div>
+
+
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="vendorEmail">
+    </div>
+
+
+    <div class="mb-3">
+      <label class="form-label">Address</label>
+      <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="vendorAddress">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
