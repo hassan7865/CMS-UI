@@ -16,6 +16,7 @@ import { DeleteComponent } from './delete/delete.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { DeleteComponent } from './delete/delete.component';
     MatDialogModule,
     MatIconModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
