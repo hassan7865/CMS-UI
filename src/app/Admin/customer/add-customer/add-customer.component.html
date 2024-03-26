@@ -9,13 +9,26 @@
     <form class="p-4" [formGroup]="createCustomerForm">
         <div class="mb-3">
           <label  class="form-label">Name</label>
-          <input type="text" class="form-control" formControlName="VendorName">
-          <span class="text-danger" *ngIf="createCustomerForm.get('VendorName').hasError('required') && createCustomerForm.get('VendorName').touched">Name is required</span>
+          <input type="text" class="form-control" formControlName="Name">
+          <span class="text-danger" *ngIf="createCustomerForm.get('Name').hasError('required') && createCustomerForm.get('Name').touched">Name is required</span>
         </div>
+
+        <div class="mb-3">
+          <label class="form-label">User Name</label>
+          <input type="text" class="form-control"  formControlName="userName">
+          <span class="text-danger " *ngIf="createCustomerForm.get('userName').hasError('required') && createCustomerForm.get('userName').touched">User Name is required</span>
+        </div>
+
         <div class="mb-3">
           <label class="form-label">Email</label>
-          <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="VendorEmail">
-          <span class="text-danger " *ngIf="createCustomerForm.get('VendorEmail').hasError('required') && createCustomerForm.get('VendorEmail').touched">Email is required</span>
+          <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="email">
+          <span class="text-danger " *ngIf="createCustomerForm.get('email').hasError('required') && createCustomerForm.get('email').touched">Email is required</span>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="text" class="form-control" formControlName="Password">
+          <span class="text-danger " *ngIf="createCustomerForm.get('Password').hasError('required') && createCustomerForm.get('Password').touched">Password is required</span>
         </div>
         <div class="mb-3">
           <label class="form-label">Address</label>
@@ -23,7 +36,7 @@
           <span class="text-danger " *ngIf="createCustomerForm.get('VendorAddress').hasError('required') && createCustomerForm.get('VendorAddress').touched">Address is required</span>
         </div>
         <div>
-            <button type="submit" class="btn btn-primary w-100" [disabled]="IsLoading || createCustomerForm.invalid">
+            <button type="submit" class="btn btn-primary w-100" [disabled]="IsLoading || createCustomerForm.invalid" (click)="onSubmit()">
                 <span *ngIf="IsLoading" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>
                 <span>{{IsLoading? "Loading...": "Submit"}}</span>
             </button>

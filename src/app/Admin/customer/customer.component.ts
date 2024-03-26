@@ -1,10 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import { CustomerService } from './../../Services/customer.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { DeleteComponent } from 'src/app/delete/delete.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 
@@ -36,7 +36,7 @@ export class CustomerComponent implements  OnInit, AfterViewInit{
   }
   constructor(
     private customerService: CustomerService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ){}
 
 
@@ -65,10 +65,13 @@ export class CustomerComponent implements  OnInit, AfterViewInit{
 
   openDialog()
   {
-    this.dialog.open(AddCustomerComponent, 
+    const dialogRef = this.dialog.open(AddCustomerComponent, 
       {
         width:'50vw',
-        height:'50'
+        height:'50',
+        data: {
+          getCustomer: this.getAllCustomer.bind(this)
+        }
       })
   }
 
