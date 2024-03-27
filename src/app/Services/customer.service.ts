@@ -19,11 +19,13 @@ export class CustomerService {
     return this.http.get(`${environment.BASEURL}/Vendor/GetVendors`);
   }
 
-  postCustomer(dataCustomer):Observable<any>
+  postCustomer(dataCustomer:any):Observable<any>
   {
     return this.http.post(`${environment.BASEURL}/Vendor/CreateVendor`,
     {
-
+      VendorName: dataCustomer.Name,
+      VendorEmail: dataCustomer.email,
+      VendorAddress: dataCustomer.VendorAddress
     })
   }
 
