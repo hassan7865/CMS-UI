@@ -94,10 +94,11 @@ export class CustomerComponent implements  OnInit, AfterViewInit{
     this.dialog.open(EditCustomerComponent,
       {
         width:'50vw',
-        height: '60%',
+        height: '68vh',
         data:
         {
-          Id: id
+          Id: id,
+          GetAllCustomer: this.getAllCustomer.bind(this)
         }
       })
   }

@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomerService } from 'src/app/Services/customer.service';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-edit-customer',
@@ -23,6 +24,7 @@ export class EditCustomerComponent implements OnInit{
         vendorName: new FormControl(null, Validators.required),
         vendorEmail: new FormControl(null, Validators.required),
         vendorAddress: new FormControl(null, Validators.required),
+        userName: new FormControl(null, Validators.required)
       }
     )
 
@@ -30,7 +32,8 @@ export class EditCustomerComponent implements OnInit{
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private customerService : CustomerService
+    private customerService : CustomerService,
+    private dialogRef: DialogRef
   ){}
 
 
@@ -48,7 +51,8 @@ export class EditCustomerComponent implements OnInit{
           this.UpdateCustomerForm.patchValue({
             vendorName : res.vendorName,
             vendorEmail: res.vendorEmail,
-            vendorAddress: res.vendorAddress
+            vendorAddress: res.vendorAddress,
+            userName: res.userName
           })
           this.IsLoadingUpdate = false;
         }
@@ -57,5 +61,20 @@ export class EditCustomerComponent implements OnInit{
     )
     
     
+  }
+
+
+  UpdateCustomer()
+  {
+    this.IsLoading = true;
+    this.customerService.updateCustomer(this.data.Id, this.UpdateCustomerForm.value)
+    .subscribe({
+      next: (res)=>
+      {
+        this.IsLoading = false;
+        this.dialogRef.close();
+        this.data.GetAllCustomer();
+      }
+    })
   }
 }
