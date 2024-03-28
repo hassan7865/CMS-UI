@@ -1,2 +1,26 @@
-
+.navbar {
+    
+    background-color: #4723d9;
+    min-height: 60px;
+    padding: 15px;
+  }
   
+  #body-pd {
+    padding-left: calc(var(--nav-width) + 218px); /* Adjusted padding for content */
+  }
+  
+  .nav_logo {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .nav_logo .nav_logo-icon {
+    margin-right: 10px;
+  }
+  
+  .nav_logo .nav_logo-name {
+    color: white;
+  }
+  .nav_name {
+    color: white !important; 
+  }
