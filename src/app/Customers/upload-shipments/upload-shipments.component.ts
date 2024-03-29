@@ -9,7 +9,7 @@ export class UploadShipmentsComponent {
 
 
   shipmentData:any[]
-  selected:any[]
+  selected:any[]=[]
   selectedAll: boolean = false;
   parseExcelFile(file: File): Promise<any[]> {
     return new Promise((resolve, reject) => {
