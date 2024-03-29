@@ -38,4 +38,14 @@ export class CustomerService {
   {
     return this.http.delete(`${environment.BASEURL}/Vendor/DeleteVendor/${id}`)
   }
+
+  updateCustomer(id:any, dataCustomer:any): Observable<any>
+  {
+    return this.http.put(`${environment.BASEURL}/Vendor/UpdateVendor/${id}`, {
+      VendorName: dataCustomer.vendorName,
+      UserName: dataCustomer.userName,
+      VendorEmail: dataCustomer.vendorEmail,
+      VendorAddress: dataCustomer.vendorAddress
+    })
+  }
 }
