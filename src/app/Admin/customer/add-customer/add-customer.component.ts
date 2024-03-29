@@ -72,7 +72,11 @@ export class AddCustomerComponent implements OnInit{
             this.data.getCustomer(),
             this.IsLoading = false;
             this.dialogRef.close();
-            openSnackBar(this._snackBar,"Created Successfully","Courier has been Created Successfully")
+            openSnackBar(this._snackBar,"Created Successfully","Courier has been Created Successfully","success")
+          },
+
+          error:(err)=>{
+            openSnackBar(this._snackBar,"Error Occured",err.Message,"error")
           }
         })
       }

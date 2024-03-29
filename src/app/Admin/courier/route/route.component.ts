@@ -51,7 +51,11 @@ export class RouteComponent implements OnInit {
         this.isCreateNew = false;
         this.getAllRoute();
         this.CreateRoute.patchValue(null);
-        openSnackBar(this.snackBar,"Created Successfully","The Route has been Created!")
+        openSnackBar(this.snackBar,"Created Successfully","The Route has been Created!","success")
+      },
+      error:(err)=>{
+        this.IsLoading = false
+        openSnackBar(this.snackBar,"An Error Occured",err.error.message,"error")
       }
      })
    }

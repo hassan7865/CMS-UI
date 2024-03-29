@@ -31,7 +31,7 @@ export class CourierService {
 
   CreateCourier(CreateCourierData,userId:any):Observable<any>{
     return this.http.post(`${environment.BASEURL}/Courier/PostCourier`,{
-      CourierName:CreateCourierData.userName,
+      CourierName:CreateCourierData.Name,
       RouteId:CreateCourierData.routeId,
       UserId:userId
     })
@@ -58,8 +58,8 @@ export class CourierService {
 
   UpdateCourier(courierId:any,courierData){
     return this.http.put(`${environment.BASEURL}/Courier/UpdateCourier/${courierId}`,{
-      courierName:courierData.userName,
-      fullName:courierData.Name,
+      courierName:courierData.Name,
+      username:courierData.userName,
       email:courierData.email,
       routeId:courierData.routeId
     })

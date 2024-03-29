@@ -30,7 +30,12 @@ export class DeleteComponent {
           this.data.getAll()
           this.loading = false
           this.dialogRef.close()
-          openSnackBar(this.matSnackBar,"Deleted Successfully","The Selected Courier has been Deleted!")
+          openSnackBar(this.matSnackBar,"Deleted Successfully","The Selected Courier has been Deleted!","success")
+        },
+        error:(err)=>{
+          this.loading = false
+          openSnackBar(this.matSnackBar,"An Error Occured",err.error.message,"error")
+          this.dialogRef.close()
         }
       });
     }
@@ -42,7 +47,12 @@ export class DeleteComponent {
           this.data.getAll()
           this.loading = false
           this.dialogRef.close()
-          openSnackBar(this.matSnackBar,"Deleted Successfully","The Selected Route has been Deleted!")
+          openSnackBar(this.matSnackBar,"Deleted Successfully","The Selected Route has been Deleted!","success")
+        },
+        error:(err)=>{
+          this.loading = false
+          openSnackBar(this.matSnackBar,"An Error Occured",err.error.message,"error")
+          this.dialogRef.close()
         }
       });
     }
@@ -57,7 +67,12 @@ export class DeleteComponent {
             this.data.getAll();
             this.loading = false;
             this.dialogRef.close();
-            openSnackBar(this.matSnackBar, "Deleted Successfuly", "The selected Customer has been Deleted!");
+            openSnackBar(this.matSnackBar, "Deleted Successfuly", "The selected Customer has been Deleted!","success");
+          },
+          error:(err)=>{
+            this.loading = false
+            openSnackBar(this.matSnackBar,"An Error Occured",err.error.message,"error")
+            this.dialogRef.close()
           }
         }
       )

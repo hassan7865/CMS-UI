@@ -15,7 +15,8 @@ export class EditCourierComponent implements OnInit {
     private courierService: CourierService,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private snackBar : MatSnackBar,
-    private dialogRef : MatDialogRef<EditCourierComponent>
+    private dialogRef : MatDialogRef<EditCourierComponent>,
+    private _snackBar : MatSnackBar
   ) {}
   UpdateCourierForm: FormGroup;
   IsLoading: boolean = false;
@@ -37,9 +38,10 @@ export class EditCourierComponent implements OnInit {
     this.IsLoadingUpdate = true;
     this.courierService.getCourierById(this.data.id).subscribe({
       next: (res) => {
+        console.log(res)
         this.UpdateCourierForm.patchValue({
-          Name: res.fullName,
-          userName: res.courierName,
+          Name: res.courierName,
+          userName: res.username,
           email: res.email,
           routeId: res.routeId,
         });
@@ -65,9 +67,13 @@ export class EditCourierComponent implements OnInit {
         next: (res) => {
           this.data.getCourier()
           this.IsLoading = false;
-          openSnackBar(this.snackBar,"Updated Successfully","The Selected Courier has been Updated!");
+          openSnackBar(this.snackBar,"Updated Successfully","The Selected Courier has been Updated!","success");
           this.dialogRef.close()
         },
+        error:(err)=>{
+          this.IsLoading = false
+          openSnackBar(this._snackBar,"An Error Occured",err.Message,"error")
+        }
       });
   }
 }

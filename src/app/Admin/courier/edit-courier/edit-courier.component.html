@@ -11,13 +11,13 @@
       <form [formGroup]="UpdateCourierForm" (ngSubmit)="OnUpdate()">
           <div class="mb-3">
             <label for="" class="form-label">Courier Name</label>
-            <input type="text" class="form-control" formControlName="userName">
-            <small *ngIf="UpdateCourierForm.get('userName').hasError('required') && UpdateCourierForm.get('userName').touched" class="text-danger">Name is required</small>
+            <input type="text" class="form-control" formControlName="Name">
+            <small *ngIf="UpdateCourierForm.get('Name').hasError('required') && UpdateCourierForm.get('Name').touched" class="text-danger">Name is required</small>
           </div>
           <div class="mb-3">
-            <label for="" class="form-label">Full Name</label>
-            <input type="text" class="form-control" formControlName="Name">
-            <small *ngIf="UpdateCourierForm.get('Name').hasError('required') && UpdateCourierForm.get('Name').touched" class="text-danger ">User Name is required</small>
+            <label for="" class="form-label">User Name</label>
+            <input type="text" class="form-control" formControlName="userName">
+            <small *ngIf="UpdateCourierForm.get('userName').hasError('required') && UpdateCourierForm.get('userName').touched" class="text-danger ">User Name is required</small>
           </div>
           
           <div class="mb-3">

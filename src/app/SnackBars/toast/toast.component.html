@@ -1,0 +1,25 @@
+<div class="d-flex gap-3 ">
+  <div *ngIf="data.type === 'success'"
+        style="width: 25px;height: 25px;display: flex;justify-content: center;align-items: center;border-radius: 50%;background-color: green;">
+        <mat-icon class="text-white fw-bold d-flex align-items-center justify-content-center "
+            style="font-size: 15px;">done</mat-icon>
+    </div>
+  <div *ngIf="data.type === 'error'" class="d-flex align-items-center justify-content-center text-danger mb-3 " style="
+            background-color: rgb(252, 187, 187);
+            width: 25px;
+            height: 25px;
+            
+            border-radius: 50%;
+          ">
+    <mat-icon>error</mat-icon>
+  </div>
+  <div>
+    <div class="fs-6 text-dark ">{{data.message}}</div>
+    <div class="text-secondary mt-1">
+      {{data.text}}
+    </div>
+  </div>
+
+
+
+</div>
