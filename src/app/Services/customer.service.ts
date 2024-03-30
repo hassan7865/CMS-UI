@@ -19,13 +19,14 @@ export class CustomerService {
     return this.http.get(`${environment.BASEURL}/Vendor/GetVendors`);
   }
 
-  postCustomer(dataCustomer:any):Observable<any>
+  postCustomer(dataCustomer:any, id:any):Observable<any>
   {
     return this.http.post(`${environment.BASEURL}/Vendor/CreateVendor`,
     {
       VendorName: dataCustomer.Name,
       VendorEmail: dataCustomer.email,
-      VendorAddress: dataCustomer.VendorAddress
+      VendorAddress: dataCustomer.VendorAddress,
+      UserId: id
     })
   }
 
@@ -45,7 +46,8 @@ export class CustomerService {
       VendorName: dataCustomer.vendorName,
       UserName: dataCustomer.userName,
       VendorEmail: dataCustomer.vendorEmail,
-      VendorAddress: dataCustomer.vendorAddress
+      VendorAddress: dataCustomer.vendorAddress,
+      PhoneNumber: dataCustomer.phoneNumber
     })
   }
 }

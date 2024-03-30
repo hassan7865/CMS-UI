@@ -24,7 +24,8 @@ export class EditCustomerComponent implements OnInit{
         vendorName: new FormControl(null, Validators.required),
         vendorEmail: new FormControl(null, Validators.required),
         vendorAddress: new FormControl(null, Validators.required),
-        userName: new FormControl(null, Validators.required)
+        userName: new FormControl(null, Validators.required),
+        phoneNumber: new FormControl (null, Validators.required)
       }
     )
 
@@ -52,7 +53,8 @@ export class EditCustomerComponent implements OnInit{
             vendorName : res.vendorName,
             vendorEmail: res.vendorEmail,
             vendorAddress: res.vendorAddress,
-            userName: res.userName
+            userName: res.userName,
+            phoneNumber: res.phoneNumber
           })
           this.IsLoadingUpdate = false;
         }

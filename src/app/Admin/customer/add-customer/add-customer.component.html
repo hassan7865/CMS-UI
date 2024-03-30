@@ -6,7 +6,7 @@
         </button>
       
     </div>
-    <form class="p-4" [formGroup]="createCustomerForm">
+    <form class="p-4" [formGroup]="createCustomerForm"  (ngSubmit)="onSubmit()">
         <div class="mb-3">
           <label  class="form-label">Name</label>
           <input type="text" class="form-control" formControlName="Name">
@@ -30,13 +30,29 @@
           <input type="text" class="form-control" formControlName="Password">
           <span class="text-danger " *ngIf="createCustomerForm.get('Password').hasError('required') && createCustomerForm.get('Password').touched">Password is required</span>
         </div>
+
+        <!-- <div class="mb-3">
+          <label class="form-label">Phone Number</label>
+          <div class="input-group" >
+            <input type="tel" #phoneInput>
+          </div>
+          <span class="text-danger " *ngIf="createCustomerForm.get('phoneNumber').hasError('required') && createCustomerForm.get('phoneNumber').touched">Phone Number is required</span>
+        </div> -->
+
+        <div class="mb-3">
+          <label class="form-label">Phone Number</label>
+          <input type="number" class="form-control" formControlName="phoneNumber">
+          <span class="text-danger" *ngIf="createCustomerForm.get('phoneNumber').hasError('required') && createCustomerForm.get('phoneNumber').touched">Phone Number is required</span>
+        </div>
+
+
         <div class="mb-3">
           <label class="form-label">Address</label>
           <input type="text" class="form-control" formControlName="VendorAddress">
           <span class="text-danger " *ngIf="createCustomerForm.get('VendorAddress').hasError('required') && createCustomerForm.get('VendorAddress').touched">Address is required</span>
         </div>
         <div>
-            <button type="submit" class="btn btn-primary w-100" [disabled]="IsLoading || createCustomerForm.invalid" (click)="onSubmit()">
+            <button type="submit" class="btn btn-primary w-100" [disabled]="IsLoading || createCustomerForm.invalid">
                 <span *ngIf="IsLoading" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>
                 <span>{{IsLoading? "Loading...": "Submit"}}</span>
             </button>

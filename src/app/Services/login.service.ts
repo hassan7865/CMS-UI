@@ -19,13 +19,14 @@ export class LoginService {
     return this.http.get(`${environment.BASEURL}/Role/GetAllRole`);
   }
 
-  CreateUser(CreateUserData):Observable<any>{
+  CreateUser(CreateUserData:any):Observable<any>{
     return this.http.post(`${environment.BASEURL}/User/Create-User`,{
       UserName:CreateUserData.userName,
       FullName:CreateUserData.Name,
       Email:CreateUserData.email,
       Password:CreateUserData.Password,
       RoleId:CreateUserData.roleId,
-    })
+      PhoneNumber: `${CreateUserData.phoneNumber}`
+    })  
   }
 }

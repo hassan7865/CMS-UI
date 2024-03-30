@@ -10,7 +10,7 @@
       <app-loader ></app-loader>
   </div>
   
-  <form class="p-4" [formGroup]="UpdateCustomerForm" *ngIf="!IsLoadingUpdate">
+  <form class="p-4" [formGroup]="UpdateCustomerForm" *ngIf="!IsLoadingUpdate" (ngSubmit)="UpdateCustomer()">
   
   
       <div class="mb-3">
@@ -29,15 +29,26 @@
         <label class="form-label">Email</label>
         <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="vendorEmail">
       </div>
+
+
+      <div class="mb-3">
+        <label class="form-label">Phone Number</label>
+        <input type="number" class="form-control" formControlName="phoneNumber">
+      </div>
   
-  
+
+      
+
       <div class="mb-3">
         <label class="form-label">Address</label>
         <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="vendorAddress">
       </div>
   
       <div>
-        <button type="submit" class="btn btn-primary w-100 " (click)="UpdateCustomer()">Submit</button>
+        <button type="submit" class="btn btn-primary w-100 ">
+          <span class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true" *ngIf="IsLoading"></span>
+          <span>{{IsLoading? "Loading...": "Submit"}}</span>
+        </button>
       </div>
   
     </form>
