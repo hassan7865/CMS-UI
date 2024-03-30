@@ -10,12 +10,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
   declarations: [
    CustomerLayoutComponent,
-   UploadShipmentsComponent
+   UploadShipmentsComponent,
+   DashboardComponent
   ],
   imports: [
     CommonModule,

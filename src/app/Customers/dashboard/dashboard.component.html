@@ -1,0 +1,99 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="input-group mb-3">
+          <h3 class="card-title">Shipments</h3>
+          <div class="buttons-container">
+              <button mat-button mat-dialog-close class="search-button">
+                  <mat-icon>search</mat-icon>
+              </button>
+              <button mat-button mat-dialog-close class="filter-button">
+                  <mat-icon>filter_alt</mat-icon>
+              </button>
+          </div>
+      </div>
+      
+          <!-- <input type="text" class="form-control" placeholder="Search Shipments">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button">
+              <i class="bi bi-search"></i>
+            </button>
+          </div> -->
+        
+        <div class="shipments-container">
+          <div class="card mb-3" *ngFor="let shipment of shipments" (click)="selectShipment(shipment)">
+            <div class="card-body">
+              <h5 class="card-title">
+                <span class="shipment-info">
+                    <span class="shipment-name">{{ shipment.name }}</span> ({{ shipment.id }})
+                </span>
+                <button mat-button mat-dialog-close class="phone">
+                    <mat-icon>phone</mat-icon>
+                </button>
+                <span class="phone-number">{{ shipment.phone }}</span>
+            </h5>
+            
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="shipment-box submit-button" style="background-color: #FFC0CB;">
+                    <p>Price</p>
+                </div>
+                <div class="shipment-box submit-button" style="background-color: #ADD8E6;">
+                    <p>Weight</p>
+                </div>
+                <div class="courier-status">
+                    <span class="label">Courier #:</span>
+                    <div class="shipment-box submit-button" style="background-color: #98FB98;">
+                        <p>--</p>
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card mb-3 customer-details-container">
+          <div class="card-body">
+            <h3 class="card-title">Shipment Information</h3>
+            <div class="form-group">
+              <label for="customerName">Customer Name:</label>
+              <input type="text" class="form-control" id="customerName">
+            </div>
+            <div class="form-group">
+              <label for="customerPhone">Customer Phone:</label>
+              <input type="text" class="form-control" id="customerPhone">
+            </div>
+            <div class="form-group">
+              <label for="shipmentId">Shipment ID:</label>
+              <input type="text" class="form-control" id="shipmentId">
+            </div>
+            <div class="form-group">
+              <label for="price">Price:</label>
+              <input type="text" class="form-control" id="price">
+            </div>
+            <div class="form-group">
+              <label for="weight">Weight:</label>
+              <input type="text" class="form-control" id="weight">
+            </div>
+            <div class="form-group">
+              <label for="address">Address:</label>
+              <textarea class="form-control" id="address" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="vendorId">Vendor ID:</label>
+              <input type="text" class="form-control" id="vendorId">
+            </div>
+            <button class="pushable">
+              <span class="shadow"></span>
+              <span class="edge"></span>
+              <span class="front">
+                Save
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
