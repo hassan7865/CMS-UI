@@ -19,7 +19,10 @@ import { EditCourierComponent } from './courier/edit-courier/edit-courier.compon
 import { CustomerComponent } from './customer/customer.component';
 import { AddCustomerComponent } from './customer/add-customer/add-customer.component';
 import { EditCustomerComponent } from './customer/edit-customer/edit-customer.component';
-
+import { TableModule } from 'primeng/table';
+import { SkeletonModule } from 'primeng/skeleton';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 @NgModule({
   declarations: [
     AdminlayoutComponent,
@@ -37,7 +40,10 @@ import { EditCustomerComponent } from './customer/edit-customer/edit-customer.co
   ],
   imports: [
     MatIconModule,
-    
+    TableModule,
+    SkeletonModule,
+    DialogModule,
+    ButtonModule,
     MatButtonModule,
     MatPaginatorModule,
     CommonModule,

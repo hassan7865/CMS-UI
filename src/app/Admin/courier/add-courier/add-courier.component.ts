@@ -1,8 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { LoginService } from 'src/app/Services/login.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CourierService } from 'src/app/Services/courier.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {
   MatSnackBar,
 } from '@angular/material/snack-bar';
@@ -12,7 +11,7 @@ import { openSnackBar } from 'src/app/SnackBar';
   templateUrl: './add-courier.component.html',
   styleUrls: ['./add-courier.component.scss']
 })
-export class AddCourierComponent implements OnInit{
+export class AddCourierComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllRoute()
@@ -29,13 +28,17 @@ export class AddCourierComponent implements OnInit{
   IsLoading= false;
   CreateCourierForm:FormGroup;
 
-  constructor(private loginService: LoginService,
-    private courierService: CourierService,
-    private dialogRef: MatDialogRef<AddCourierComponent>,
+  constructor(private loginService: LoginService ,private courierService: CourierService,
     private _snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) private data: any,
-    ){}
+   ){}
+  @Input() visible: boolean;
+  @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
    
+  closeDialog(){
+    this.visible = false
+    this.visibleChange.emit(this.visible);
+  }
 
   getAllRoute()
   {
@@ -45,10 +48,10 @@ export class AddCourierComponent implements OnInit{
       next: (res)=>
       {
         this.dataRoute = res
-      
       }
     })
   }
+
 
   OnSubmit(){
     this.IsLoading = true
@@ -69,9 +72,8 @@ export class AddCourierComponent implements OnInit{
   CreateCourier(userId:any){
     this.courierService.CreateCourier(this.CreateCourierForm.value,userId).subscribe({
       next:(res)=>{
-        this.data.getCourier()
         this.IsLoading = false
-        this.dialogRef.close()
+        this.closeDialog()
         openSnackBar(this._snackBar,"Created Successfully","Courier has been Created Successfully","success")
       },
       error:(err)=>{
@@ -79,10 +81,6 @@ export class AddCourierComponent implements OnInit{
         openSnackBar(this._snackBar,"An Error Occured",err.error.message,"error")
       }
     })
-  }
-
-  handleClose(){
-    this.dialogRef.close()
   }
 }
 

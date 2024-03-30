@@ -16,26 +16,33 @@ import { EditCourierComponent } from './edit-courier/edit-courier.component';
   templateUrl: './courier.component.html',
   styleUrls: ['./courier.component.scss']
 })
-export class CourierComponent implements AfterViewInit,OnInit {
+export class CourierComponent implements OnInit {
 
-  dataCourier = new MatTableDataSource<any[]>();
   IsLoading:boolean = false
-  displayedColumns: string[] = ['No', 'Name', 'RouteId','edit','delete'];
+  CourierData:any[]
+  cols = [
+    { field: 'Name', header: 'Name' },
+    { field: 'RouteName', header: 'Route Name' },
+    { field: 'PhoneNumber', header: 'Phone' },
+    { field: 'Email', header: 'Email' },
+];
 
   constructor(private courierservice: CourierService,
     private dialog: MatDialog,) {}
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-
+    visible: boolean = false;
   ngOnInit(): void {
     this.getAllCourier()
    
   }
-  ngAfterViewInit(): void {
-    this.dataCourier.paginator = this.paginator;
+ 
+
+  showDialog() {
+      this.visible = true;
   }
-   
+
+  onDialogVisibilityChange(visible: boolean) {
+    this.visible = visible;
+  }
     getAllCourier() 
     {
       this.IsLoading = true
@@ -45,7 +52,8 @@ export class CourierComponent implements AfterViewInit,OnInit {
           next : (res) =>
           {
             this.IsLoading = false
-            this.dataCourier.data = res;
+            this.CourierData = res;
+            console.log(res)
           } 
         }
       )
@@ -91,4 +99,6 @@ export class CourierComponent implements AfterViewInit,OnInit {
         }
       })
     }
+    
+   
 }
