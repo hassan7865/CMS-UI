@@ -10,12 +10,12 @@
 
 </mat-dialog-content> -->
 
-<p-dialog [closable]="false"  header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50rem' }"
+<p-dialog [closable]="false" header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50rem' }"
   [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
   <ng-template pTemplate="header">
     <div class="d-flex justify-content-between align-items-center w-100">
       <h4 class="text-left">Update Courier</h4>
-      <button mat-button mat-dialog-close>
+      <button mat-button mat-dialog-close (click)="closeDialog()">
         <mat-icon>close</mat-icon>
       </button>
     </div>
@@ -45,15 +45,19 @@
         <small *ngIf="CreateCourierForm.get('Password').hasError('required') && CreateCourierForm.get('Password').touched" class="text-danger ">Password is required</small>
       </div> 
       <div class="mb-3">
-        <mat-label for="">Select Route</mat-label>
-        <mat-select class="form-control" formControlName="routeId">
-            <mat-option *ngFor="let route of dataRoute" [value]="route.routeId">
-                {{route.routeName}}       
-            </mat-option>
-        </mat-select>
+        <label for="routeId" class="form-label">Select Route</label>
+        <div>
+          <p-dropdown 
+          id="routeId" 
+          formControlName="routeId" 
+          [options]="dataRoute" 
+          optionLabel="routeName" 
+          [style]="{ 'width': '100%'}"
+          placeholder="Select Route"
+        ></p-dropdown>
+        </div>
         <small *ngIf="CreateCourierForm.get('routeId').hasError('required') && CreateCourierForm.get('routeId').touched" class="text-danger ">Route is required</small>
       </div>
-    
       <div >
           <button style="width: 100%;" type="submit" class="btn btn-primary" [disabled]="CreateCourierForm.invalid || IsLoading">
               <span *ngIf="IsLoading" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>

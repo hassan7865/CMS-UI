@@ -23,6 +23,7 @@ import { TableModule } from 'primeng/table';
 import { SkeletonModule } from 'primeng/skeleton';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
 @NgModule({
   declarations: [
     AdminlayoutComponent,
@@ -40,6 +41,7 @@ import { ButtonModule } from 'primeng/button';
   ],
   imports: [
     MatIconModule,
+    DropdownModule,
     TableModule,
     SkeletonModule,
     DialogModule,
