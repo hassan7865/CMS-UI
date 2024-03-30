@@ -47,7 +47,7 @@ export class CustomerService {
       UserName: dataCustomer.userName,
       VendorEmail: dataCustomer.vendorEmail,
       VendorAddress: dataCustomer.vendorAddress,
-      PhoneNumber: dataCustomer.phoneNumber
+      PhoneNumber: `${dataCustomer.phoneNumber}`
     })
   }
 }

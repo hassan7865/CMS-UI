@@ -3,6 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomerService } from 'src/app/Services/customer.service';
 import { DialogRef } from '@angular/cdk/dialog';
+import { openSnackBar } from 'src/app/SnackBar';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { error } from 'jquery';
 
 @Component({
   selector: 'app-edit-customer',
@@ -34,7 +37,8 @@ export class EditCustomerComponent implements OnInit{
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
     private customerService : CustomerService,
-    private dialogRef: DialogRef
+    private dialogRef: DialogRef,
+    private _snackBar: MatSnackBar
   ){}
 
 
@@ -76,6 +80,11 @@ export class EditCustomerComponent implements OnInit{
         this.IsLoading = false;
         this.dialogRef.close();
         this.data.GetAllCustomer();
+        openSnackBar(this._snackBar,"Updated Successfully","Customer has been Updated Successfully","success")
+      },
+      error: (err) =>
+      {
+        openSnackBar(this._snackBar,"Error Occured",err.error,"error")
       }
     })
   }
