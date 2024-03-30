@@ -52,7 +52,7 @@ import { ButtonModule } from 'primeng/button';
     MatDialogModule,
     DataTablesModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class AdminModule { }

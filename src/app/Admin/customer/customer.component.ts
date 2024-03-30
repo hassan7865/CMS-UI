@@ -40,10 +40,6 @@ export class CustomerComponent implements  OnInit, AfterViewInit{
   ){}
 
 
-
-
-
-
   getAllCustomer()
   {
     this.IsLoading = true;
@@ -94,7 +90,7 @@ export class CustomerComponent implements  OnInit, AfterViewInit{
     this.dialog.open(EditCustomerComponent,
       {
         width:'50vw',
-        height: '68vh',
+        height: '80vh',
         data:
         {
           Id: id,
