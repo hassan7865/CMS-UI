@@ -1,5 +1,5 @@
 import { DialogRef } from '@angular/cdk/dialog';
-import { Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -18,6 +18,7 @@ export class AddCustomerComponent implements OnInit{
   createCustomerForm: FormGroup;
   IsLoading:Boolean=false;
   dataCustomer: any[]
+  @ViewChild('phone') phoneInput: ElementRef;
 
 
   ngOnInit(): void {
@@ -28,8 +29,11 @@ export class AddCustomerComponent implements OnInit{
         userName: new FormControl(null, Validators.required),
         Password: new FormControl(null, Validators.required),
         VendorAddress: new FormControl(null, Validators.required),
-        roleId: new FormControl (1002, Validators.required)
+        roleId: new FormControl (1002, Validators.required),
+        phoneNumber: new FormControl (null, Validators.required)
       })
+
+      
       }
       constructor( private customerService: CustomerService,
         private dialogRef: DialogRef,
@@ -56,23 +60,30 @@ export class AddCustomerComponent implements OnInit{
           this.loginService.CreateUser(this.createCustomerForm.value).
           subscribe({
             next: (res)=>{
-              this.PostCustomer();
+              this.PostCustomer(res.id);
+              this.IsLoading = false;
             }
           })
         }
 
 
 
-      PostCustomer()
+      PostCustomer(id:any)
       {
-        this.customerService.postCustomer(this.createCustomerForm.value).
+        console.log(this.createCustomerForm.value);
+        
+        this.customerService.postCustomer(this.createCustomerForm.value, id).
         subscribe({
           next: (res) =>
           {
             this.data.getCustomer(),
             this.IsLoading = false;
             this.dialogRef.close();
-            openSnackBar(this._snackBar,"Created Successfully","Courier has been Created Successfully")
+            openSnackBar(this._snackBar,"Created Successfully","Customer has been Created Successfully","success")
+          },
+
+          error:(err)=>{
+            openSnackBar(this._snackBar,"Error Occured",err.Message,"error")
           }
         })
       }

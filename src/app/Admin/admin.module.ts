@@ -19,6 +19,7 @@ import { EditCourierComponent } from './courier/edit-courier/edit-courier.compon
 import { CustomerComponent } from './customer/customer.component';
 import { AddCustomerComponent } from './customer/add-customer/add-customer.component';
 import { EditCustomerComponent } from './customer/edit-customer/edit-customer.component';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { EditCustomerComponent } from './customer/edit-customer/edit-customer.co
     MatDialogModule,
     DataTablesModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxIntlTelInputModule
   ]
 })
 export class AdminModule { }

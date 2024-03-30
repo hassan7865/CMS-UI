@@ -10,7 +10,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CreatedComponent } from './SnackBars/created/created.component';
+import { ToastComponent } from './SnackBars/toast/toast.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { DeleteComponent } from './delete/delete.component';
 
@@ -22,7 +22,7 @@ import { DeleteComponent } from './delete/delete.component';
   declarations: [
     AppComponent,
     NotfoundPageComponent,
-    CreatedComponent,
+    ToastComponent,
     DeleteComponent,
   ],
   imports: [

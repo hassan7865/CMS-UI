@@ -55,7 +55,13 @@ export class AddCourierComponent implements OnInit{
     this.loginService.CreateUser(this.CreateCourierForm.value).subscribe({
       next:(res)=>{
         this.CreateCourier(res.id)
+      } ,
+      error:(err)=>{
+        this.IsLoading = false
+        openSnackBar(this._snackBar,"An Error Occured",err.error.message,"error")
+        console.log(err)
       }
+
     })
     
   }
@@ -66,7 +72,11 @@ export class AddCourierComponent implements OnInit{
         this.data.getCourier()
         this.IsLoading = false
         this.dialogRef.close()
-        openSnackBar(this._snackBar,"Created Successfully","Courier has been Created Successfully")
+        openSnackBar(this._snackBar,"Created Successfully","Courier has been Created Successfully","success")
+      },
+      error:(err)=>{
+        this.IsLoading = false
+        openSnackBar(this._snackBar,"An Error Occured",err.error.message,"error")
       }
     })
   }
