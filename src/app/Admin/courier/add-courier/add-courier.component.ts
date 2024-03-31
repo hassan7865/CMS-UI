@@ -17,12 +17,12 @@ export class AddCourierComponent implements OnInit {
   ngOnInit(): void {
     this.getAllRoute()
     this.CreateCourierForm = new FormGroup({
-      Name: new FormControl(null,Validators.required),
-      userName: new FormControl(null, Validators.required),
-      email:new FormControl(null),
-      Password: new FormControl(null, Validators.required),
-      roleId: new FormControl(2, Validators.required),
-      routeId:new FormControl(null, Validators.required)
+      courierName: new FormControl(null,Validators.required),
+      username: new FormControl(null, Validators.required),
+      password:new FormControl(null),
+      email: new FormControl(null, Validators.required),
+      routeId: new FormControl(2, Validators.required),
+      phoneNumber:new FormControl(null, Validators.required)
     })
   }
   dataRoute:any[];
@@ -47,24 +47,11 @@ export class AddCourierComponent implements OnInit {
   }
 
 
-  OnSubmit(){
+ 
+
+  CreateCourier(){
     this.IsLoading = true
-    this.loginService.CreateUser(this.CreateCourierForm.value).subscribe({
-      next:(res)=>{
-        this.CreateCourier(res.id)
-      } ,
-      error:(err)=>{
-        this.IsLoading = false
-        openSnackBar(this._snackBar,"An Error Occured",err.error.message,"error")
-        console.log(err)
-      }
-
-    })
-    
-  }
-
-  CreateCourier(userId:any){
-    this.courierService.CreateCourier(this.CreateCourierForm.value,userId).subscribe({
+    this.courierService.CreateCourier(this.CreateCourierForm.value).subscribe({
       next:(res)=>{
         this.IsLoading = false
         this.ref.close()

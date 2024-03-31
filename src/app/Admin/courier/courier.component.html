@@ -70,6 +70,8 @@
   <div *ngIf="IsLoading" class="d-flex justify-content-around align-items-center" style="height: 250px">
     <app-loader></app-loader>
   </div>
+
+  <button (click)="openAddcourier()" *ngIf="!IsLoading" class="btn btn-primary">Create</button>
   <p-table *ngIf="!IsLoading" [value]="CourierData" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true"
     [rows]="5" [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5, 10, 20]">

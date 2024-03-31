@@ -26,6 +26,7 @@ import { FooterComponent } from './footer/footer.component';
     MatIconModule,
     ReactiveFormsModule,
     PublicRoutingModule,
+
   ]
 })
 export class PublicModule { }

@@ -29,11 +29,9 @@ export class CourierService {
    return this.http.get(`${environment.BASEURL}/Route/GetAllRoute`) 
   }
 
-  CreateCourier(CreateCourierData,userId:any):Observable<any>{
-    return this.http.post(`${environment.BASEURL}/Courier/PostCourier`,{
-      CourierName:CreateCourierData.Name,
-      RouteId:CreateCourierData.routeId,
-      UserId:userId
+  CreateCourier(CreateCourierData):Observable<any>{
+    return this.http.post(`${environment.BASEURL}/Courier/Create-Courier`,{
+      ...CreateCourierData
     })
   }
 

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
 section {
-    --header-height: 3rem;
+    --header-height: 2rem;
     --nav-width: 68px;
     --first-color: #4723D9;
     --first-color-light: #AFA5D9;
@@ -180,3 +180,6 @@ a {
         padding-left: calc(var(--nav-width) + 188px)
     }
 }
+
+.content {
+    height: 100%;}

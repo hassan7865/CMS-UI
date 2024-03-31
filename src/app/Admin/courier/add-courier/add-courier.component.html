@@ -11,27 +11,38 @@
 </mat-dialog-content> -->
 <div>
   <div>
-    <form [formGroup]="CreateCourierForm" (ngSubmit)="OnSubmit()">
+    <form [formGroup]="CreateCourierForm" (ngSubmit)="CreateCourier()">
       <div class="mb-3">
         <label for="" class="form-label">Courier Name</label>
-        <input type="text" class="form-control" formControlName="Name">
-        <small *ngIf="CreateCourierForm.get('Name').hasError('required') && CreateCourierForm.get('Name').touched" class="text-danger">Name is required</small>
+        <input type="text" class="form-control" formControlName="courierName">
+        <small *ngIf="CreateCourierForm.get('courierName').hasError('required') && CreateCourierForm.get('courierName').touched" class="text-danger">Name is required</small>
       </div>
       <div class="mb-3">
         <label for="" class="form-label">User Name</label>
-        <input type="text" class="form-control" formControlName="userName">
-        <small *ngIf="CreateCourierForm.get('userName').hasError('required') && CreateCourierForm.get('userName').touched" class="text-danger ">User Name is required</small>
+        <input type="text" class="form-control" formControlName="username">
+        <small *ngIf="CreateCourierForm.get('username').hasError('required') && CreateCourierForm.get('username').touched" class="text-danger ">User Name is required</small>
       </div>
       
-      <div class="mb-3">
-        <label for="" class="form-label">Email</label>
-        <input autocomplete="off" type="email" class="form-control" formControlName="email">
+     
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><mat-icon>email</mat-icon></div>
+          </div>
+          <input type="email" class="form-control" formControlName="email" placeholder="Email">
+        </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><mat-icon>phone</mat-icon></div>
+        </div>
+        <input type="text" class="form-control" formControlName="phoneNumber" placeholder="Phone Number">
+        <small *ngIf="CreateCourierForm.get('phoneNumber').hasError('required') && CreateCourierForm.get('phoneNumber').touched" class="text-danger ">User Name is required</small>
       </div>
 
       <div class="mb-3">
         <label for="" class="form-label">Password</label>
-        <input  autocomplete="new-password" type="password" class="form-control" formControlName="Password">
-        <small *ngIf="CreateCourierForm.get('Password').hasError('required') && CreateCourierForm.get('Password').touched" class="text-danger ">Password is required</small>
+        <input  autocomplete="new-password" type="password" class="form-control" formControlName="password">
+        <small *ngIf="CreateCourierForm.get('password').hasError('required') && CreateCourierForm.get('password').touched" class="text-danger ">Password is required</small>
       </div> 
       <div class="mb-3">
         <label for="routeId" class="form-label">Select Route</label>
