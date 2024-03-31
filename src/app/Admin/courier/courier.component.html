@@ -99,13 +99,13 @@
         <td>{{ item.phoneNumber ? item.phoneNumber : "-" }}</td>
         <td>{{ item.routeName ? item.routeName : "-" }}</td>
         <td>
-          <button (click)="showDialog()"
+          <button (click)="openUpdate(item.courierId)"
             class="btn btn-primary d-flex align-items-center justify-content-center">
             <mat-icon>edit</mat-icon>
           </button>
         </td>
         <td>
-          <button (click)="openAddCourier()" class="btn btn-danger d-flex align-items-center justify-content-center">
+          <button  class="btn btn-danger d-flex align-items-center justify-content-center">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -113,4 +113,3 @@
     </ng-template>
   </p-table>
 </div>
-<app-add-courier [visible]="visible" (visibleChange)="onDialogVisibilityChange($event)"></app-add-courier>

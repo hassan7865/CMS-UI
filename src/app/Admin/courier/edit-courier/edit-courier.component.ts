@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CourierService } from 'src/app/Services/courier.service';
 import { openSnackBar } from 'src/app/SnackBar';
 
@@ -13,9 +14,9 @@ import { openSnackBar } from 'src/app/SnackBar';
 export class EditCourierComponent implements OnInit {
   constructor(
     private courierService: CourierService,
-    @Inject(MAT_DIALOG_DATA) private data: any,
+    public config: DynamicDialogConfig,
     private snackBar : MatSnackBar,
-    private dialogRef : MatDialogRef<EditCourierComponent>,
+    private ref : DynamicDialogRef,
     private _snackBar : MatSnackBar
   ) {}
   UpdateCourierForm: FormGroup;
@@ -36,9 +37,8 @@ export class EditCourierComponent implements OnInit {
 
   getCourier() {
     this.IsLoadingUpdate = true;
-    this.courierService.getCourierById(this.data.id).subscribe({
+    this.courierService.getCourierById(this.config.data.id).subscribe({
       next: (res) => {
-        console.log(res)
         this.UpdateCourierForm.patchValue({
           Name: res.courierName,
           userName: res.username,
@@ -62,16 +62,17 @@ export class EditCourierComponent implements OnInit {
   OnUpdate() {
     this.IsLoading = true;
     this.courierService
-      .UpdateCourier(this.data.id, this.UpdateCourierForm.value)
+      .UpdateCourier(this.config.data.id, this.UpdateCourierForm.value)
       .subscribe({
         next: (res) => {
-          this.data.getCourier()
+          this.config.data.getCourier()
           this.IsLoading = false;
+          this.ref.close()
           openSnackBar(this.snackBar,"Updated Successfully","The Selected Courier has been Updated!","success");
-          this.dialogRef.close()
         },
         error:(err)=>{
           this.IsLoading = false
+          this.ref.close()
           openSnackBar(this._snackBar,"An Error Occured",err.Message,"error")
         }
       });

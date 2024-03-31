@@ -10,11 +10,13 @@ import { DeleteComponent } from 'src/app/delete/delete.component';
 import { openSnackBar } from 'src/app/SnackBar';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EditCourierComponent } from './edit-courier/edit-courier.component';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-courier',
   templateUrl: './courier.component.html',
-  styleUrls: ['./courier.component.scss']
+  styleUrls: ['./courier.component.scss'],
+  providers:[DialogService]
 })
 export class CourierComponent implements OnInit {
 
@@ -26,22 +28,16 @@ export class CourierComponent implements OnInit {
     { field: 'PhoneNumber', header: 'Phone' },
     { field: 'Email', header: 'Email' },
 ];
+ ref: DynamicDialogRef | undefined;
 
   constructor(private courierservice: CourierService,
-    private dialog: MatDialog,) {}
+    private dialog: MatDialog,
+    public dialogService: DialogService
+    ) {}
     visible: boolean = false;
   ngOnInit(): void {
     this.getAllCourier()
    
-  }
- 
-
-  showDialog() {
-      this.visible = true;
-  }
-
-  onDialogVisibilityChange(visible: boolean) {
-    this.visible = visible;
   }
     getAllCourier() 
     {
@@ -59,14 +55,17 @@ export class CourierComponent implements OnInit {
       )
     }
 
-    openAddCourier()
-    {
-      const dialogRef = this.dialog.open(AddCourierComponent, {
-        width: "45%",
-        data:{
-          getCourier:this.getAllCourier.bind(this)
-        }
-      })
+    openAddcourier(){
+      this.ref = this.dialogService.open(AddCourierComponent, {
+        header: 'Create Courier',
+        width: '50vw',
+        modal:true,
+        breakpoints: {
+            '960px': '75vw',
+            '640px': '90vw'
+        },
+        data: { getCourier: this.getAllCourier.bind(this) }
+    });
     }
 
     openRoute()
@@ -78,13 +77,19 @@ export class CourierComponent implements OnInit {
 
     openUpdate(id:any)
     {
-      const dialogRef = this.dialog.open(EditCourierComponent, {
-        width: "45%",
-        data:{
+      this.ref = this.dialogService.open(EditCourierComponent, {
+        header: 'Update Courier',
+        width: '50vw',
+        modal:true,
+        breakpoints: {
+            '960px': '75vw',
+            '640px': '90vw'
+        },
+        data: { 
           id:id,
-          getCourier:this.getAllCourier.bind(this)
-        }
-      })
+          getCourier: this.getAllCourier.bind(this)
+         }
+    });
     }
 
     openDeleteDialog(id:any) {

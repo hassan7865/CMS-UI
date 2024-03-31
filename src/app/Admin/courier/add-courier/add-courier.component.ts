@@ -6,6 +6,7 @@ import {
   MatSnackBar,
 } from '@angular/material/snack-bar';
 import { openSnackBar } from 'src/app/SnackBar';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 @Component({
   selector: 'app-add-courier',
   templateUrl: './add-courier.component.html',
@@ -30,16 +31,9 @@ export class AddCourierComponent implements OnInit {
 
   constructor(private loginService: LoginService ,private courierService: CourierService,
     private _snackBar: MatSnackBar,
+    public ref: DynamicDialogRef, 
+    public config: DynamicDialogConfig
    ){}
-  @Input() visible: boolean;
-  @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-   
-  closeDialog(){
-    this.visible = false
-    this.visibleChange.emit(this.visible);
-  }
-
   getAllRoute()
   {
     this.courierService.getAllRoute()
@@ -73,11 +67,13 @@ export class AddCourierComponent implements OnInit {
     this.courierService.CreateCourier(this.CreateCourierForm.value,userId).subscribe({
       next:(res)=>{
         this.IsLoading = false
-        this.closeDialog()
+        this.ref.close()
+        this.config.data.getCourier()
         openSnackBar(this._snackBar,"Created Successfully","Courier has been Created Successfully","success")
       },
       error:(err)=>{
         this.IsLoading = false
+        this.ref.close()
         openSnackBar(this._snackBar,"An Error Occured",err.error.message,"error")
       }
     })
