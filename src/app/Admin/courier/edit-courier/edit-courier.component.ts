@@ -39,6 +39,7 @@ export class EditCourierComponent implements OnInit {
     this.IsLoadingUpdate = true;
     this.courierService.getCourierById(this.config.data.id).subscribe({
       next: (res) => {
+        console.log(res)
         this.UpdateCourierForm.patchValue({
           Name: res.courierName,
           userName: res.username,

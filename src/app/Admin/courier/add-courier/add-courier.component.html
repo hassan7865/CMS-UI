@@ -35,16 +35,9 @@
       </div> 
       <div class="mb-3">
         <label for="routeId" class="form-label">Select Route</label>
-        <div>
-          <p-dropdown 
-          id="routeId" 
-          formControlName="routeId" 
-          [options]="dataRoute" 
-          optionLabel="routeName" 
-          [style]="{ 'width': '100%'}"
-          placeholder="Select Route"
-        ></p-dropdown>
-        </div>
+        <select class="form-select form-select" formControlName="routeId">
+          <option *ngFor="let item of dataRoute" [value]="item.routeId">{{item.routeName}}</option>
+        </select> 
         <small *ngIf="CreateCourierForm.get('routeId').hasError('required') && CreateCourierForm.get('routeId').touched" class="text-danger ">Route is required</small>
       </div>
       <div >
