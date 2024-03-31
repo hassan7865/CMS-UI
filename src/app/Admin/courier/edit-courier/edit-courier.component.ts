@@ -56,6 +56,8 @@ export class EditCourierComponent implements OnInit {
     this.courierService.getAllRoute().subscribe({
       next: (res) => {
         this.dataRoute = res;
+        console.log(res);
+        
       },
     });
   }
