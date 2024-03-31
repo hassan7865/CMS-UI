@@ -15,53 +15,63 @@
       <div class="mb-3">
         <label for="" class="form-label">Courier Name</label>
         <input type="text" class="form-control" formControlName="courierName">
-        <small *ngIf="CreateCourierForm.get('courierName').hasError('required') && CreateCourierForm.get('courierName').touched" class="text-danger">Name is required</small>
+        <small
+          *ngIf="CreateCourierForm.get('courierName').hasError('required') && CreateCourierForm.get('courierName').touched"
+          class="text-danger">Name is required</small>
       </div>
       <div class="mb-3">
         <label for="" class="form-label">User Name</label>
         <input type="text" class="form-control" formControlName="username">
-        <small *ngIf="CreateCourierForm.get('username').hasError('required') && CreateCourierForm.get('username').touched" class="text-danger ">User Name is required</small>
+        <small
+          *ngIf="CreateCourierForm.get('username').hasError('required') && CreateCourierForm.get('username').touched"
+          class="text-danger ">User Name is required</small>
       </div>
-      
-     
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <div class="input-group-text"><mat-icon>email</mat-icon></div>
-          </div>
-          <input type="email" class="form-control" formControlName="email" placeholder="Email">
-        </div>
+
 
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <div class="input-group-text"><mat-icon>phone</mat-icon></div>
+          <div class="input-group-text"><mat-icon>email</mat-icon></div>
         </div>
-        <input type="text" class="form-control" formControlName="phoneNumber" placeholder="Phone Number">
-        <small *ngIf="CreateCourierForm.get('phoneNumber').hasError('required') && CreateCourierForm.get('phoneNumber').touched" class="text-danger ">User Name is required</small>
+        <input type="email" class="form-control" formControlName="email" placeholder="Email">
+      </div>
+
+
+
+      <div class="mb-3 ">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><mat-icon>phone</mat-icon></div>
+          </div>
+          <input type="text" class="form-control" formControlName="phoneNumber" placeholder="Phone Number">
+        </div>
+        <small
+          *ngIf="CreateCourierForm.get('phoneNumber').hasError('required') && CreateCourierForm.get('phoneNumber').touched"
+          class="text-danger ">Phone Number is required</small>
       </div>
 
       <div class="mb-3">
         <label for="" class="form-label">Password</label>
-        <input  autocomplete="new-password" type="password" class="form-control" formControlName="password">
-        <small *ngIf="CreateCourierForm.get('password').hasError('required') && CreateCourierForm.get('password').touched" class="text-danger ">Password is required</small>
-      </div> 
+        <input autocomplete="new-password" type="password" class="form-control" formControlName="password">
+        <small
+          *ngIf="CreateCourierForm.get('password').hasError('required') && CreateCourierForm.get('password').touched"
+          class="text-danger ">Password is required</small>
+      </div>
       <div class="mb-3">
         <label for="routeId" class="form-label">Select Route</label>
         <select class="form-select form-select" formControlName="routeId">
           <option *ngFor="let item of dataRoute" [value]="item.routeId">{{item.routeName}}</option>
-        </select> 
-        <small *ngIf="CreateCourierForm.get('routeId').hasError('required') && CreateCourierForm.get('routeId').touched" class="text-danger ">Route is required</small>
+        </select>
+        <small *ngIf="CreateCourierForm.get('routeId').hasError('required') && CreateCourierForm.get('routeId').touched"
+          class="text-danger ">Route is required</small>
       </div>
-      <div >
-          <button style="width: 100%;" type="submit" class="btn btn-primary" [disabled]="CreateCourierForm.invalid || IsLoading">
-              <span *ngIf="IsLoading" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>
-              <span>{{IsLoading ? "Loading..": "Submit"}}</span>
-          </button>
+      
+      <div>
+        <button style="width: 100%;" type="submit" class="btn btn-primary"
+          [disabled]="CreateCourierForm.invalid || IsLoading">
+          <span *ngIf="IsLoading" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>
+          <span>{{IsLoading ? "Loading..": "Submit"}}</span>
+        </button>
       </div>
-  </form>
+    </form>
   </div>
-  <ng-template pTemplate="footer">
-    <p-button icon="pi pi-check" label="Ok" pAutoFocus [autofocus]="true"></p-button>
-  </ng-template>
-
 </div>
-

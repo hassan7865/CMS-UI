@@ -19,8 +19,8 @@ export class AddCourierComponent implements OnInit {
     this.CreateCourierForm = new FormGroup({
       courierName: new FormControl(null,Validators.required),
       username: new FormControl(null, Validators.required),
-      password:new FormControl(null),
-      email: new FormControl(null, Validators.required),
+      password:new FormControl(null,Validators.required),
+      email: new FormControl(null),
       routeId: new FormControl(2, Validators.required),
       phoneNumber:new FormControl(null, Validators.required)
     })
