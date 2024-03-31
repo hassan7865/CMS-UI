@@ -7,6 +7,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { CounterComponent } from './counter/counter.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -14,10 +17,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     PublicLayoutComponent,
     NavbarComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    CounterComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
+    MatIconModule,
     ReactiveFormsModule,
     PublicRoutingModule,
   ]
