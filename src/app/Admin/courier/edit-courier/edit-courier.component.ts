@@ -20,7 +20,7 @@ export class EditCourierComponent implements OnInit {
     private _snackBar : MatSnackBar
   ) {}
   UpdateCourierForm: FormGroup;
-  IsLoading: boolean = false;
+  IsLoading: boolean = false; 
   IsLoadingUpdate: boolean = false;
   dataRoute: any[];
   ngOnInit(): void {
@@ -47,10 +47,11 @@ export class EditCourierComponent implements OnInit {
       next: (res) => {
         console.log(res)
         this.UpdateCourierForm.patchValue({
-          Name: res.courierName,
-          userName: res.username,
+          courierName: res.courierName,
+          username: res.username,
           email: res.email,
           routeId: res.routeId,
+          phoneNumber: res.phoneNumber
         });
 
         this.IsLoadingUpdate = false;
@@ -82,6 +83,8 @@ export class EditCourierComponent implements OnInit {
         error:(err)=>{
           this.IsLoading = false
           this.ref.close()
+          console.log(err);
+          
           openSnackBar(this._snackBar,"An Error Occured",err.Message,"error")
         }
       });

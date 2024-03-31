@@ -71,7 +71,10 @@
     <app-loader></app-loader>
   </div>
 
-  <button (click)="openAddcourier()" *ngIf="!IsLoading" class="btn btn-primary">Create</button>
+  <div class="d-flex justify-content-between mb-3" *ngIf="!IsLoading">
+    <button (click)="openAddcourier()"  class="btn btn-primary d-flex justify-content-center align-items-center gap-2 "> <mat-icon>add_task</mat-icon> Create</button>
+    <button (click)="openRoute()" class="btn btn-dark d-flex justify-content-center align-items-center gap-2 " ><mat-icon>transfer_within_a_station</mat-icon> Route</button>
+  </div>
   <p-table *ngIf="!IsLoading" [value]="CourierData" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true"
     [rows]="5" [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5, 10, 20]">
@@ -107,7 +110,7 @@
           </button>
         </td>
         <td>
-          <button  class="btn btn-danger d-flex align-items-center justify-content-center">
+          <button (click)="openDeleteDialog(item.courierId)" class="btn btn-danger d-flex align-items-center justify-content-center">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

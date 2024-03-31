@@ -54,12 +54,9 @@ export class CourierService {
   }
 
 
-  UpdateCourier(courierId:any,courierData){
+  UpdateCourier(courierId:any,courierData:any){
     return this.http.put(`${environment.BASEURL}/Courier/UpdateCourier/${courierId}`,{
-      courierName:courierData.Name,
-      username:courierData.userName,
-      email:courierData.email,
-      routeId:courierData.routeId
+      ... courierData
     })
   }
 }

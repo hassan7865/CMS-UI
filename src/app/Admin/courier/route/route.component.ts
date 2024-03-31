@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CourierService } from 'src/app/Services/courier.service';
 import { openSnackBar } from 'src/app/SnackBar';
 import { DeleteComponent } from 'src/app/delete/delete.component';
@@ -14,10 +15,14 @@ import { DeleteComponent } from 'src/app/delete/delete.component';
 export class RouteComponent implements OnInit {
   IsLoading:boolean = false
   LoadingRoute:boolean = false
+  ref: DynamicDialogRef | undefined;
   ngOnInit(): void {
    this.getAllRoute()
   }
-  constructor(private courierService : CourierService,private dialog:MatDialog,private snackBar : MatSnackBar){}
+  constructor(private courierService : CourierService,
+  private dialogService: DialogService,
+
+  private snackBar : MatSnackBar){}
   dataRoute:any[]
   isCreateNew:boolean = false
   CreateRoute: FormControl = new FormControl(null, [Validators.required]);
@@ -62,15 +67,22 @@ export class RouteComponent implements OnInit {
   }
 
   openDeleteDialog(id:any) {
-    const dialogRef = this.dialog.open(DeleteComponent, {
-      height: '',
-      width: '350px',
-
-      data:{
+    this.ref = this.dialogService.open(DeleteComponent, {
+      width: '30vw',
+      // height: 'max-content',
+      showHeader:false,
+      modal:true,
+      
+      breakpoints: {
+          '960px': '65vw',
+          '640px': '90vw'
+      },
+      data: { 
         id:id,
-        type:'route',
-        getAll:this.getAllRoute.bind(this)
-      }
-    })
+        getAll: this.getAllRoute.bind(this),
+        type:'route'
+       }
+  });
+
   }
 }

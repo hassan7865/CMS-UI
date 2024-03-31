@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CourierService } from '../Services/courier.service';
 import { openSnackBar } from '../SnackBar';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomerService } from '../Services/customer.service';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-delete',
@@ -14,65 +14,65 @@ export class DeleteComponent {
   loading: boolean = false;
 
   constructor(
-    public dialogRef: MatDialogRef<DeleteComponent>,
+    public ref : DynamicDialogRef,
+    public config: DynamicDialogConfig,
     private courierService: CourierService,
     private customerService: CustomerService,
-    @Inject(MAT_DIALOG_DATA) private data: any,
     private matSnackBar : MatSnackBar
   ) {}
 
   Delete() {
 
-    if(this.data.type === 'courier'){
+    if(this.config.data.type === 'courier'){
       this.loading =true
-      this.courierService.deleteCourier(this.data.id).subscribe({
+      this.courierService.deleteCourier(this.config.data.id).subscribe({
         next:(res)=>{
-          this.data.getAll()
+          this.config.data.getAll()
           this.loading = false
-          this.dialogRef.close()
+          this.ref.close()
           openSnackBar(this.matSnackBar,"Deleted Successfully","The Selected Courier has been Deleted!","success")
         },
         error:(err)=>{
           this.loading = false
           openSnackBar(this.matSnackBar,"An Error Occured",err.error.message,"error")
-          this.dialogRef.close()
+          this.ref.close()
         }
       });
     }
 
-    else if(this.data.type === 'route'){
+    else if(this.config.data.type === 'route'){
       this.loading =true
-      this.courierService.deleteRoute(this.data.id).subscribe({
+      this.courierService.deleteRoute(this.config.data.id).subscribe({
         next:(res)=>{
-          this.data.getAll()
+          this.config.data.getAll()
           this.loading = false
-          this.dialogRef.close()
+          this.ref.close()
           openSnackBar(this.matSnackBar,"Deleted Successfully","The Selected Route has been Deleted!","success")
         },
         error:(err)=>{
           this.loading = false
           openSnackBar(this.matSnackBar,"An Error Occured",err.error.message,"error")
-          this.dialogRef.close()
+          this.ref.close()
         }
       });
     }
 
-    else if (this.data.type === 'customer')
+    else if (this.config.data.type === 'customer')
     {
       this.loading = true;
-      this.customerService.deleteCustomer(this.data.id).subscribe(
+      this.customerService.deleteCustomer(this.config.data.id).subscribe(
         {
           next: (res)=>
           {
-            this.data.getAll();
+            this.config.data.getAll();
             this.loading = false;
-            this.dialogRef.close();
+            this.ref.close();
             openSnackBar(this.matSnackBar, "Deleted Successfuly", "The selected Customer has been Deleted!","success");
           },
           error:(err)=>{
             this.loading = false
             openSnackBar(this.matSnackBar,"An Error Occured",err.error.message,"error")
-            this.dialogRef.close()
+            this.ref.close()
           }
         }
       )

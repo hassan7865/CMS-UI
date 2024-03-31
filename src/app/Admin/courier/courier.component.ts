@@ -70,9 +70,15 @@ export class CourierComponent implements OnInit {
 
     openRoute()
     {
-      const dialogRef = this.dialog.open(RouteComponent, {
-        width: "45%",
-      })
+      this.ref = this.dialogService.open(RouteComponent, {
+        header: 'All Route',
+        width: '50vw',
+        modal:true,
+        breakpoints: {
+            '960px': '75vw',
+            '640px': '90vw'
+        },
+    });
     }
 
     openUpdate(id:any)
@@ -92,17 +98,22 @@ export class CourierComponent implements OnInit {
     });
     }
 
-    openDeleteDialog(id:any) {
-      const dialogRef = this.dialog.open(DeleteComponent, {
-        height: '',
-        width: '350px',
-  
-        data:{
+    openDeleteDialog(id:any) {    
+      this.ref = this.dialogService.open(DeleteComponent, {
+        width: '30vw',
+        // height: 'max-content',
+        showHeader:false,
+        modal:true,
+        breakpoints: {
+            '960px': '65vw',
+            '640px': '90vw'
+        },
+        data: { 
           id:id,
-          type:"courier",
-          getAll:this.getAllCourier.bind(this)
-        }
-      })
+          getAll: this.getAllCourier.bind(this),
+          type:'courier'
+         }
+    });
     }
     
    
