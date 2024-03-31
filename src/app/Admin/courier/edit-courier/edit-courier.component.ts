@@ -25,10 +25,16 @@ export class EditCourierComponent implements OnInit {
   dataRoute: any[];
   ngOnInit(): void {
     this.UpdateCourierForm = new FormGroup({
-      Name: new FormControl(null, Validators.required),
-      userName: new FormControl(null, Validators.required),
-      email: new FormControl(null),
-      routeId: new FormControl(null, Validators.required),
+      // CourierName: new FormControl(null, Validators.required),
+      // Username: new FormControl(null, Validators.required),
+      // Email: new FormControl(null),
+      // RouteId: new FormControl(null, Validators.required),
+      // PhoneNumber: new FormControl(null, Validators.required)
+      courierName: new FormControl(null,Validators.required),
+      username: new FormControl(null, Validators.required),
+      email: new FormControl(null, Validators.required),
+      routeId: new FormControl(2, Validators.required),
+      phoneNumber:new FormControl(null, Validators.required)
     });
 
     this.getCourier();

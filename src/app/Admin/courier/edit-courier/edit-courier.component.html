@@ -5,37 +5,50 @@
   <form [formGroup]="UpdateCourierForm" (ngSubmit)="OnUpdate()">
     <div class="mb-3">
       <label for="" class="form-label">Courier Name</label>
-      <input type="text" class="form-control" formControlName="Name">
-      <small *ngIf="UpdateCourierForm.get('Name').hasError('required') && UpdateCourierForm.get('Name').touched"
-        class="text-danger">Name is required</small>
+      <input type="text" class="form-control" formControlName="courierName">
+      <small *ngIf="UpdateCourierForm.get('courierName').hasError('required') && UpdateCourierForm.get('courierName').touched" class="text-danger">Name is required</small>
     </div>
     <div class="mb-3">
       <label for="" class="form-label">User Name</label>
-      <input type="text" class="form-control" formControlName="userName">
-      <small *ngIf="UpdateCourierForm.get('userName').hasError('required') && UpdateCourierForm.get('userName').touched"
-        class="text-danger ">User Name is required</small>
+      <input type="text" class="form-control" formControlName="username">
+      <small *ngIf="UpdateCourierForm.get('username').hasError('required') && UpdateCourierForm.get('username').touched" class="text-danger ">User Name is required</small>
+    </div>
+    
+   
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><mat-icon>email</mat-icon></div>
+        </div>
+        <input type="email" class="form-control" formControlName="email" placeholder="Email">
+      </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <div class="input-group-text"><mat-icon>phone</mat-icon></div>
+      </div>
+      <input type="text" class="form-control" formControlName="phoneNumber" placeholder="Phone Number">
+      <small *ngIf="UpdateCourierForm.get('phoneNumber').hasError('required') && UpdateCourierForm.get('phoneNumber').touched" class="text-danger ">User Name is required</small>
     </div>
 
     <div class="mb-3">
-      <label for="" class="form-label">Email</label>
-      <input autocomplete="off" type="email" class="form-control" formControlName="email">
-    </div>
-
+      <label for="" class="form-label">Password</label>
+      <input  autocomplete="new-password" type="password" class="form-control" formControlName="password">
+      <small *ngIf="UpdateCourierForm.get('password').hasError('required') && UpdateCourierForm.get('password').touched" class="text-danger ">Password is required</small>
+    </div> 
     <div class="mb-3">
       <label for="routeId" class="form-label">Select Route</label>
       <select class="form-select form-select" formControlName="routeId">
         <option *ngFor="let item of dataRoute" [value]="item.routeId">{{item.routeName}}</option>
-      </select>   
+      </select> 
       <small *ngIf="UpdateCourierForm.get('routeId').hasError('required') && UpdateCourierForm.get('routeId').touched" class="text-danger ">Route is required</small>
     </div>
-
-    <div>
-      <button style="width: 100%;" type="submit" class="btn btn-primary"
-        [disabled]="UpdateCourierForm.invalid || IsLoading">
-        <span *ngIf="IsLoading" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>
-        <span>{{IsLoading ? "Loading..": "Submit"}}</span>
-      </button>
+    <div >
+        <button style="width: 100%;" type="submit" class="btn btn-primary" [disabled]="UpdateCourierForm.invalid || IsLoading">
+            <span *ngIf="IsLoading" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>
+            <span>{{IsLoading ? "Loading..": "Submit"}}</span>
+        </button>
     </div>
+
   </form>
 
 </div>
