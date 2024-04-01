@@ -1,7 +1,7 @@
-/* General styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
+    
 }
 
 .container {
@@ -17,11 +17,11 @@ h3.card-title {
     margin-bottom: 20px;
 }
 
-/* Styling for shipments container and cards */
 .shipments-container {
     max-height: 400px;
     overflow-y: auto;
 }
+
 
 .card {
     margin-bottom: 15px;
@@ -43,7 +43,6 @@ h3.card-title {
     margin-bottom: 10px;
 }
 
-/* Styling for customer details container */
 .customer-details-container {
     background-color: #fff;
     border-radius: 10px;
@@ -67,7 +66,7 @@ h3.card-title {
 }
 
 .submit-button:hover {
-    filter: brightness(85%); /* Add a brightness effect on hover for feedback */
+    filter: brightness(85%); 
 }
 
   .shipment-name {
@@ -97,7 +96,7 @@ h3.card-title {
 }
 
 .label {
-    margin-right: 10px; /* Adjust as needed for spacing */
+    margin-right: 10px; 
     font-weight: bold;
 }
 
@@ -133,7 +132,7 @@ h3.card-title {
     
 }
 .phone {
-    margin-right: 110px; /* Adjust spacing between icon and number as needed */
+    margin-right: 110px; 
     margin-top: -4px;
 }
 .pushable {
@@ -225,6 +224,33 @@ h3.card-title {
     outline: none;
   }
   
+  .form-group {
+    margin-bottom: 20px;
+    
+  }
+  
+  .form-control {
+    margin-top: 12px;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+  }
+  .text-danger {
+    color: #dc3545; 
+    font-size: 0.875rem; 
+    margin-top: 0.25rem; 
+  }
+  
+  
+  .form-control.is-invalid {
+    border-color: #dc3545; 
+  }
+
+  
+  
+
 
 
 
