@@ -3,6 +3,7 @@ import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CustomerService } from 'src/app/Services/customer.service';
 import { LoginService } from 'src/app/Services/login.service';
 import { openSnackBar } from 'src/app/SnackBar';
@@ -18,28 +19,27 @@ export class AddCustomerComponent implements OnInit{
   createCustomerForm: FormGroup;
   IsLoading:Boolean=false;
   dataCustomer: any[]
-  @ViewChild('phone') phoneInput: ElementRef;
 
 
   ngOnInit(): void {
     this.createCustomerForm = new FormGroup(
       {
-        Name: new FormControl(null, Validators.required),
-        email: new FormControl(null, Validators.required),
-        userName: new FormControl(null, Validators.required),
+        VendorName: new FormControl(null, Validators.required),
+        VendorEmail: new FormControl(null, Validators.required),
+        UserName: new FormControl(null, Validators.required),
         Password: new FormControl(null, Validators.required),
         VendorAddress: new FormControl(null, Validators.required),
-        roleId: new FormControl (1002, Validators.required),
-        phoneNumber: new FormControl (null, Validators.required)
+        PhoneNumber: new FormControl (null, Validators.required)
       })
 
       
       }
       constructor( private customerService: CustomerService,
-        private dialogRef: DialogRef,
         private loginService: LoginService,
         private _snackBar: MatSnackBar,
-        @Inject (MAT_DIALOG_DATA) private data: any 
+        private config: DynamicDialogConfig,
+        private ref: DynamicDialogRef
+
 
       ){}
 
@@ -53,36 +53,39 @@ export class AddCustomerComponent implements OnInit{
           })
         }
 
-        onSubmit()
-        {
-          this.IsLoading = true;
-          console.log(this.createCustomerForm.value);
-          this.loginService.CreateUser(this.createCustomerForm.value).
-          subscribe({
-            next: (res)=>{
-              this.PostCustomer(res.id);
-              this.IsLoading = false;
-            }
-          })
-        }
+        // onSubmit()
+        // {
+        //   this.IsLoading = true;
+        //   console.log(this.createCustomerForm.value);
+        //   this.loginService.CreateUser(this.createCustomerForm.value).
+        //   subscribe({
+        //     next: (res)=>{
+        //       this.PostCustomer(res.id);
+        //       this.IsLoading = false;
+        //     }
+        //   })
+        // }
 
 
 
-      PostCustomer(id:any)
+      PostCustomer()
       {
+        this.IsLoading = true
         console.log(this.createCustomerForm.value);
         
-        this.customerService.postCustomer(this.createCustomerForm.value, id).
+        this.customerService.postCustomer(this.createCustomerForm.value).
         subscribe({
           next: (res) =>
           {
-            this.data.getCustomer(),
+            this.config.data.getAll(),
             this.IsLoading = false;
-            this.dialogRef.close();
+            this.ref.close();
             openSnackBar(this._snackBar,"Created Successfully","Customer has been Created Successfully","success")
           },
 
           error:(err)=>{
+            console.log(err);
+            
             openSnackBar(this._snackBar,"Error Occured",err.Message,"error")
           }
         })

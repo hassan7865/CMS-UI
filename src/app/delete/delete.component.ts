@@ -71,6 +71,8 @@ export class DeleteComponent {
           },
           error:(err)=>{
             this.loading = false
+            console.log(err);
+            
             openSnackBar(this.matSnackBar,"An Error Occured",err.error.message,"error")
             this.ref.close()
           }

@@ -21,7 +21,7 @@ import { AddCustomerComponent } from './customer/add-customer/add-customer.compo
 import { EditCustomerComponent } from './customer/edit-customer/edit-customer.component';
 import { TableModule } from 'primeng/table';
 import { SkeletonModule } from 'primeng/skeleton';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 @NgModule({
@@ -54,6 +54,10 @@ import { DropdownModule } from 'primeng/dropdown';
     DataTablesModule,
     MatSelectModule,
     ReactiveFormsModule,
+  
+  ],
+  providers:[
+    DialogService
   ]
 })
 export class AdminModule { }

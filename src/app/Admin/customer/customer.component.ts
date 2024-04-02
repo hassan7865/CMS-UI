@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import { CustomerService } from './../../Services/customer.service';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+
 import { DeleteComponent } from 'src/app/delete/delete.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
+import { SortEvent } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
 
 
 @Component({
@@ -14,21 +14,11 @@ import { EditCustomerComponent } from './edit-customer/edit-customer.component';
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.scss']
 })
-export class CustomerComponent implements  OnInit, AfterViewInit{
+export class CustomerComponent implements  OnInit{
 
-
-  // dataCustomer:any[];
+  dataCustomer:any[]
   IsLoading:Boolean = false;
 
-  displayedColumns: string[] = ['No.', 'Name', 'Email', 'Address', 'Edit', 'Delete'];
-  dataCustomer= new MatTableDataSource<any[]>();
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-
-  ngAfterViewInit(): void {
-    this.dataCustomer.paginator = this.paginator;
-  }
 
 
   ngOnInit(): void {
@@ -36,8 +26,40 @@ export class CustomerComponent implements  OnInit, AfterViewInit{
   }
   constructor(
     private customerService: CustomerService,
-    private dialog: MatDialog,
+    public dialogService: DialogService
+
   ){}
+
+  ref: DynamicDialogRef | undefined;
+
+
+  customSort(event: SortEvent) {
+    // Copy the data array
+    try {
+      let sortedData = [...event.data];
+  
+      sortedData.sort((data1, data2) => {
+          let value1 = data1[event.field];
+          let value2 = data2[event.field];
+          let result = null;
+  
+          if (value1 == null && value2 != null) result = -1;
+          else if (value1 != null && value2 == null) result = 1;
+          else if (value1 == null && value2 == null) result = 0;
+          else if (typeof value1 === 'string' && typeof value2 === 'string') result = value1.localeCompare(value2);
+          else result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
+  
+          return event.order * result;
+      });
+  
+      // Assign the sorted array back to event.data
+      event.data = sortedData;
+    }
+    catch{
+      console.log("Error");
+      
+    }
+}
 
 
   getAllCustomer()
@@ -47,7 +69,7 @@ export class CustomerComponent implements  OnInit, AfterViewInit{
     .subscribe({
       next: (res) =>
       {
-        this.dataCustomer.data = res
+        this.dataCustomer = res
         console.log(res);
         
         this.IsLoading = false;        
@@ -61,42 +83,69 @@ export class CustomerComponent implements  OnInit, AfterViewInit{
 
   openDialog()
   {
-    const dialogRef = this.dialog.open(AddCustomerComponent, 
-      {
-        width:'50vw',
-        height:'50',
-        data: {
-          getCustomer: this.getAllCustomer.bind(this)
-        }
-      })
+    this.ref = this.dialogService.open(AddCustomerComponent, {
+      // showHeader:false,
+      header: 'Create Customer',
+      width: '50vw',
+      height: '100vh',
+      modal:true,
+      breakpoints: {
+          '960px': '75vw',
+          '640px': '90vw'
+      },
+      data:{
+        getAll: this.getAllCustomer.bind(this)
+      }
+  });
+    
   }
 
   deleteCustomer(id:any)
   {
-    this.dialog.open(DeleteComponent,
-      {
-        width: '350px',
-        data: {
-          id: id,
-          type:'customer',
-          getAll: this.getAllCustomer.bind(this)
-        }
-      })
+    this.ref = this.dialogService.open(DeleteComponent,{
+      width: '30vw',
+      modal:true,
+      breakpoints: {
+        '960px': '65vw',
+        '640px': '90vw'
+      },
+      data: {
+        id:id,
+        getAll: this.getAllCustomer.bind(this),
+        type: 'customer'
+      }
+    })
+    // this.dialog.open(DeleteComponent,
+    //   {
+    //     width: '350px',
+    //     data: {
+    //       id: id,
+    //       type:'customer',
+    //       getAll: this.getAllCustomer.bind(this)
+    //     }
+    //   })
   }
 
 
   editCustomer(id:any)
-  {
-    this.dialog.open(EditCustomerComponent,
-      {
-        width:'50vw',
-        height: '80vh',
-        data:
-        {
-          Id: id,
-          GetAllCustomer: this.getAllCustomer.bind(this)
-        }
-      })
+  { 
+    console.log(id);
+    
+    this.ref = this.dialogService.open(EditCustomerComponent,{
+      // showHeader:false,
+      header:'Update Customer',
+      width: '50vw',
+      height: '100vh',
+      modal:true,
+      breakpoints: {
+          '960px': '75vw',
+          '640px': '90vw'
+      },
+      data: {
+        Id:id,
+        getAll: this.getAllCustomer.bind(this),
+      }
+    })
   }
 
 }

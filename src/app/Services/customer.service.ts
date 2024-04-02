@@ -19,14 +19,11 @@ export class CustomerService {
     return this.http.get(`${environment.BASEURL}/Vendor/GetVendors`);
   }
 
-  postCustomer(dataCustomer:any, id:any):Observable<any>
+  postCustomer(dataCustomer:any):Observable<any>
   {
     return this.http.post(`${environment.BASEURL}/Vendor/CreateVendor`,
     {
-      VendorName: dataCustomer.Name,
-      VendorEmail: dataCustomer.email,
-      VendorAddress: dataCustomer.VendorAddress,
-      UserId: id
+      ... dataCustomer
     })
   }
 
@@ -43,11 +40,7 @@ export class CustomerService {
   updateCustomer(id:any, dataCustomer:any): Observable<any>
   {
     return this.http.put(`${environment.BASEURL}/Vendor/UpdateVendor/${id}`, {
-      VendorName: dataCustomer.vendorName,
-      UserName: dataCustomer.userName,
-      VendorEmail: dataCustomer.vendorEmail,
-      VendorAddress: dataCustomer.vendorAddress,
-      PhoneNumber: `${dataCustomer.phoneNumber}`
+      ... dataCustomer
     })
   }
 }

@@ -1,4 +1,4 @@
-<div class="mat-elevation-z8 mb-5">
+<!-- <div class="mat-elevation-z8 mb-5">
     <p style="background-color: #5236c2; font-weight: 600;" class="text-white pt-2 px-3 pb-1 fs-5 rounded-top">Customer</p>
     <button class="btn mx-3 text-white " style="background-color: #5236c2;" (click)="openDialog()">Create</button>
     <div *ngIf="IsLoading" class="d-flex justify-content-around align-items-center" style="height: 250px;">
@@ -15,25 +15,22 @@
 
     <table *ngIf="!IsLoading && dataCustomer.data.length!==0" mat-table [dataSource]="dataCustomer">
         
-      <!-- Position Column -->
       <ng-container matColumnDef="No.">
         <th mat-header-cell *matHeaderCellDef> No. </th>
         <td mat-cell *matCellDef="let elementl let i= index"> {{i+1}} </td>
       </ng-container>
   
-      <!-- Name Column -->
+      
       <ng-container matColumnDef="Name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let element"> {{element.vendorName}} </td>
       </ng-container>
 
-      <!-- Weight Column -->
       <ng-container matColumnDef="Email">
         <th mat-header-cell *matHeaderCellDef> Email </th>
         <td mat-cell *matCellDef="let element"> {{element.vendorEmail}} </td>
       </ng-container>
   
-      <!-- Symbol Column -->
       <ng-container matColumnDef="Address">
         <th mat-header-cell *matHeaderCellDef> Address </th>
         <td mat-cell *matCellDef="let element"> {{element.vendorAddress}} </td>
@@ -62,3 +59,31 @@
                    aria-label="Select page of periodic elements">
     </mat-paginator>
   </div>
+
+   -->
+
+
+   <button (click)="openDialog()" class="btn btn-secondary mt-3 d-flex justify-content-center align-items-center gap-1"> <mat-icon>supervisor_account</mat-icon> Create</button>
+   <div class="card mt-3">
+    
+    <p-table [value]="dataCustomer" (sortFunction)="customSort($event)" [customSort]="true" [tableStyle]="{'min-width': '60rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="name" style="width:20%">Name <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="email" style="width:20%">Email <p-sortIcon field="email"></p-sortIcon></th>
+                <th pSortableColumn="address" style="width:20%">Address <p-sortIcon field="address"></p-sortIcon></th>
+                <th  style="width:20%">Edit</th>
+                <th style="width:20%">Delete</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+            <tr>
+                <td>{{item.vendorName}}</td>
+                <td>{{item.vendorEmail}}</td>
+                <td>{{item.vendorAddress}}</td>
+                <td><button class="btn btn-primary d-flex justify-content-center align-content-center " (click)="editCustomer(item.vendorId)"><mat-icon>edit</mat-icon></button></td>
+                <td><button class="btn btn-danger d-flex justify-content-center align-content-center " (click)="deleteCustomer(item.vendorId)"><mat-icon>delete</mat-icon></button></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
