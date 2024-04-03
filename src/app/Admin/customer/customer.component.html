@@ -63,8 +63,12 @@
    -->
 
 
-   <button (click)="openDialog()" class="btn btn-secondary mt-3 d-flex justify-content-center align-items-center gap-1"> <mat-icon>supervisor_account</mat-icon> Create</button>
-   <div class="card mt-3">
+   <button (click)="openDialog()" *ngIf="!IsLoading" class="btn btn-secondary mt-3 d-flex justify-content-center align-items-center gap-1"> <mat-icon>supervisor_account</mat-icon> Create</button>
+   
+   <div *ngIf="IsLoading" class="d-flex justify-content-around align-items-center" style="height: 250px;">
+    <app-loader></app-loader>
+  </div>
+   <div class="card mt-3" *ngIf="!IsLoading">
     
     <p-table [value]="dataCustomer" (sortFunction)="customSort($event)" [customSort]="true" [tableStyle]="{'min-width': '60rem'}">
         <ng-template pTemplate="header">
