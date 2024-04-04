@@ -6,11 +6,13 @@
       </button>
   </div> -->
   
-  <div *ngIf="IsLoadingUpdate" class="d-flex justify-content-center align-items-center h-75">
+  <div class="" style="min-height: 10rem;">
+
+    <div *ngIf="IsLoadingUpdate" class="d-flex justify-content-center align-items-center" style="min-height: 10rem;">
       <app-loader ></app-loader>
   </div>
   
-  <form class="p-4" [formGroup]="UpdateCustomerForm" *ngIf="!IsLoadingUpdate" (ngSubmit)="UpdateCustomer()">
+  <form class="p-4" [formGroup]="UpdateCustomerForm" *ngIf="!IsLoadingUpdate" (ngSubmit)="UpdateCustomer()" id="scroll" style="height: 25rem;overflow: auto;">
   
   
       <div class="mb-3">
@@ -54,3 +56,4 @@
     </form>
 
     
+  </div>

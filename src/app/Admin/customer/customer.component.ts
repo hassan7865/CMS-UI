@@ -33,33 +33,7 @@ export class CustomerComponent implements  OnInit{
   ref: DynamicDialogRef | undefined;
 
 
-  customSort(event: SortEvent) {
-    // Copy the data array
-    try {
-      let sortedData = [...event.data];
-  
-      sortedData.sort((data1, data2) => {
-          let value1 = data1[event.field];
-          let value2 = data2[event.field];
-          let result = null;
-  
-          if (value1 == null && value2 != null) result = -1;
-          else if (value1 != null && value2 == null) result = 1;
-          else if (value1 == null && value2 == null) result = 0;
-          else if (typeof value1 === 'string' && typeof value2 === 'string') result = value1.localeCompare(value2);
-          else result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
-  
-          return event.order * result;
-      });
-  
-      // Assign the sorted array back to event.data
-      event.data = sortedData;
-    }
-    catch{
-      console.log("Error");
-      
-    }
-}
+
 
 
   getAllCustomer()
@@ -135,7 +109,6 @@ export class CustomerComponent implements  OnInit{
       // showHeader:false,
       header:'Update Customer',
       width: '50vw',
-      height: '100vh',
       modal:true,
       breakpoints: {
           '960px': '75vw',
