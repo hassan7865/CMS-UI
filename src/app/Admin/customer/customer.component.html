@@ -62,7 +62,7 @@
 
    -->
 
-
+   <h1 class="fw-bold">Customer</h1>
    <button (click)="openDialog()" *ngIf="!IsLoading" class="btn btn-secondary mt-3 d-flex justify-content-center align-items-center gap-1"> <mat-icon>supervisor_account</mat-icon> Create</button>
    
    <div *ngIf="IsLoading" class="d-flex justify-content-around align-items-center" style="height: 250px;">
@@ -70,7 +70,17 @@
   </div>
    <div class="card mt-3" *ngIf="!IsLoading">
     
-    <p-table [value]="dataCustomer" (sortFunction)="customSort($event)" [customSort]="true" [tableStyle]="{'min-width': '60rem'}">
+    <p-table 
+    [value]="dataCustomer" 
+    (sortFunction)="customSort($event)" 
+    [customSort]="true" 
+    [tableStyle]="{'min-width': '60rem'}"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    >
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="name" style="width:20%">Name <p-sortIcon field="name"></p-sortIcon></th>
@@ -89,5 +99,11 @@
                 <td><button class="btn btn-danger d-flex justify-content-center align-content-center " (click)="deleteCustomer(item.vendorId)"><mat-icon>delete</mat-icon></button></td>
             </tr>
         </ng-template>
+        <ng-template pTemplate="paginatorleft">
+          <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+      </ng-template>
+      <ng-template pTemplate="paginatorright">
+          <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+      </ng-template>
     </p-table>
 </div>
