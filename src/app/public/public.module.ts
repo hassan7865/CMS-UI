@@ -10,6 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { CounterComponent } from './counter/counter.component';
 import { FooterComponent } from './footer/footer.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ServicesComponent } from './services/services.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { FooterComponent } from './footer/footer.component';
     LoginComponent,
     HomeComponent,
     CounterComponent,
-    FooterComponent
+    FooterComponent,
+    AboutUsComponent,
+    ServicesComponent
   ],
   imports: [
     CommonModule,

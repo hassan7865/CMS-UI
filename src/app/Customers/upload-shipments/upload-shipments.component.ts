@@ -3,14 +3,15 @@ import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-upload-shipments',
   templateUrl: './upload-shipments.component.html',
-  styleUrls: ['./upload-shipments.component.scss']
+  styleUrls: ['./upload-shipments.component.scss'],
+  
 })
 export class UploadShipmentsComponent {
 
-
-  shipmentData:any[]
-  selected:any[]=[]
+  shipmentData: any[] = [];
+  selected: any[] = [];
   selectedAll: boolean = false;
+
   parseExcelFile(file: File): Promise<any[]> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -20,7 +21,6 @@ export class UploadShipmentsComponent {
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
         const shipmentData = XLSX.utils.sheet_to_json(worksheet, { header: 0 });
-        console.log(shipmentData);
         resolve(shipmentData);
       };
       reader.onerror = (error) => {
@@ -29,7 +29,6 @@ export class UploadShipmentsComponent {
       reader.readAsBinaryString(file);
     });
   }
-  
 
   handleFileInput(event: any) {
     const file = event.target.files[0];
@@ -37,7 +36,6 @@ export class UploadShipmentsComponent {
       this.parseExcelFile(file)
         .then((shipmentData: any[]) => {
           this.shipmentData = [...shipmentData];
-          console.log(this.shipmentData);
         })
         .catch((error) => {
           console.error('Error parsing Excel file:', error);
@@ -45,9 +43,10 @@ export class UploadShipmentsComponent {
     }
   }
 
-  isChecked(record:string): boolean {
+  isChecked(record: string): boolean {
     return this.selected.includes(record);
   }
+
   toggleSelection(record: any): void {
     const index = this.selected.indexOf(record);
     if (index === -1) {
@@ -65,5 +64,4 @@ export class UploadShipmentsComponent {
       this.selected = [];
     }
   }
-
 }

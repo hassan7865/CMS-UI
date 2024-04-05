@@ -14,16 +14,14 @@ import { ToastComponent } from './SnackBars/toast/toast.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { DeleteComponent } from './delete/delete.component';
 
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
     NotfoundPageComponent,
     ToastComponent,
     DeleteComponent,
+    
+
   ],
   imports: [
     BrowserModule,
@@ -35,7 +33,8 @@ import { DeleteComponent } from './delete/delete.component';
     MatIconModule,
     MatSelectModule,
     ReactiveFormsModule,
-    
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
