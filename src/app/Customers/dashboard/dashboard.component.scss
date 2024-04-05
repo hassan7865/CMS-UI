@@ -51,12 +51,10 @@ h3.card-title {
 
 
 .submit-button {
-    font-weight: 500;
+    
     border: none;
     border-radius: 15px;
-    padding: 8px 16px;
     text-align: center;
-    color: #090909;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -95,7 +93,8 @@ h3.card-title {
     align-items: center;
 }
 
-.label {
+.courier-text {
+    font-size: medium;
     margin-right: 10px; 
     font-weight: bold;
 }
@@ -247,7 +246,9 @@ h3.card-title {
   .form-control.is-invalid {
     border-color: #dc3545; 
   }
-
+label{
+  font-size: medium;
+}
   
   
 

@@ -35,6 +35,7 @@ import { DeleteComponent } from './delete/delete.component';
     MatIconModule,
     MatSelectModule,
     ReactiveFormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
