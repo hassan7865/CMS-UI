@@ -1,55 +1,47 @@
-<div class="d-flex justify-content-between p-4 pb-2" style="background-color: #5236c2;">
-    <h3 class="text-white">Upload</h3>
-    <button mat-button mat-dialog-close>
-        <mat-icon class="text-white">close</mat-icon>
+<!-- First section with button -->
+<div class="p-3">
+    <button class="upload">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+            aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M13.5 3H12H8C6.34315 3 5 4.34315 5 6V18C5 19.6569 6.34315 21 8 21H11M13.5 3L19 8.625M13.5 3V7.625C13.5 8.17728 13.9477 8.625 14.5 8.625H19M19 8.625V11.8125"
+                stroke="#fffffff" stroke-width="2"></path>
+            <path d="M17 15V18M17 21V18M17 18H14M17 18H20" stroke="#fffffff" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round"></path>
+        </svg>
+        <input type="file" (change)="handleFileInput($event)">
+        ADD FILE
     </button>
 </div>
-<mat-dialog-content>
-    <!-- First section with button -->
-    <div class="p-3">
-        <button class="upload">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M13.5 3H12H8C6.34315 3 5 4.34315 5 6V18C5 19.6569 6.34315 21 8 21H11M13.5 3L19 8.625M13.5 3V7.625C13.5 8.17728 13.9477 8.625 14.5 8.625H19M19 8.625V11.8125"
-                    stroke="#fffffff" stroke-width="2"></path>
-                <path d="M17 15V18M17 21V18M17 18H14M17 18H20" stroke="#fffffff" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round"></path>
-            </svg>
-            <input type="file" (change)="handleFileInput($event)">
-            ADD FILE
-        </button>
+<!-- Second section with file data and table -->
+<div style="overflow: auto;">
+    <div *ngIf="shipmentData && shipmentData.length !== 0" class="d-flex justify-content-between mt-3">
+        <p-table [value]="shipmentData" [tableStyle]="{ 'min-width': '50rem' }" [(selection)]="selected" dataKey="id" [paginator]="true" [rows]="10"
+            [rowsPerPageOptions]="[5, 10, 20]">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 4rem">
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Weight</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                <tr [pSelectableRow]="rowData">
+                    <td>
+                        <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                    </td>
+                    <td>{{ rowData.cname }}</td>
+                    <td>{{ rowData.price }}</td>
+                    <td>{{ rowData.weight }}</td>
+                    <td>{{ rowData.phone }}</td>
+                    <td>{{ rowData.address }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
     </div>
-    <!-- Second section with file data and table -->
-    <div style="height: 250px; overflow: auto;">
-        <div *ngIf="shipmentData && shipmentData.length !== 0" class="d-flex justify-content-between mt-3">
-            <p-table [value]="shipmentData" [(selection)]="selected" dataKey="id" [paginator]="true" [rows]="10"
-                [rowsPerPageOptions]="[5, 10, 20]">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th style="width: 4rem">
-                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                        </th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Weight</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
-                    <tr [pSelectableRow]="rowData">
-                        <td>
-                            <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
-                        </td>
-                        <td>{{ rowData.cname }}</td>
-                        <td>{{ rowData.price }}</td>
-                        <td>{{ rowData.weight }}</td>
-                        <td>{{ rowData.phone }}</td>
-                        <td>{{ rowData.address }}</td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        </div>
-    </div>
-</mat-dialog-content>
+</div>
